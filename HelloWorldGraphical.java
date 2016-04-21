@@ -1,92 +1,93 @@
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
- 
-public class HelloWorldGraphical  {
-    
-   private JFrame mainFrame;
-   private JLabel msgLabel;
-   private JPanel controlPanel;
-   private JPanel buttonPanel;
-   private JPanel msgPanel;
+import java.awt.event.*; 
+import javax.swing.*; 
 
-   public HelloWorldGraphical(){
-      loadGUI();
-   }
+public class HelloWorldGraphical extends JFrame {
 
-   public static void main(String[] args){
-      HelloWorldGraphical  hello = new HelloWorldGraphical();      
-      hello.printMsg();
-   }
+    private JButton german = new JButton("German");
+    private JButton english = new JButton("English");
+    private JButton french = new JButton("french");
+    private JButton quit = new JButton("Beenden");
+    private JLabel msgLabel = new JLabel("");;
+    private JPanel controlPanel = new JPanel(new GridBagLayout());;
+    private JPanel buttonPanel = new JPanel(new GridBagLayout());;
+    private JPanel msgPanel = new JPanel(new GridBagLayout());;
 
-   private void loadGUI(){
-      mainFrame = new JFrame("Hello GUI");
-      mainFrame.setSize(300,300);
-      mainFrame.setLayout(new GridLayout(3,1,0,2));
-      mainFrame.addWindowListener(new WindowAdapter() {
-         public void windowClosing(WindowEvent windowEvent){
-            System.exit(0);
-         }        
-      });    
+    public HelloWorldGraphical() {
 
-      controlPanel = new JPanel();
-      controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
-      
-      msgLabel = new JLabel("",JLabel.CENTER);    
-     
-      buttonPanel = new JPanel();
-      buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
-      buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-      buttonPanel.add(Box.createHorizontalGlue());
-      buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setTitle("Hello GUI");
+        this.setLayout(new GridBagLayout());
+        this.setSize(300, 300);
 
-      JButton beenden = new JButton("Beenden");
-      beenden.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-         }          
-      });
-      beenden.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-      buttonPanel.add(beenden);
+        GridBagConstraints constraints = new GridBagConstraints(); 
+        
+        //controlPanel
+        constraints.weighty = 0.5;
+        constraints.weightx = 1.0;
+        constraints.fill = GridBagConstraints.BOTH;
+        this.add(controlPanel, constraints);
+        
+        //msgPanel
+        constraints.gridy = 1;
+        constraints.weighty = 0.5;
+        this.add(msgPanel, constraints); 
+        
+        //buttonPanel
+        constraints.gridy = 2;
+        constraints.weighty = 0.1;
+        this.add(buttonPanel, constraints);
 
-      mainFrame.add(controlPanel);
-      mainFrame.add(msgLabel);
-      mainFrame.add(buttonPanel);
-      mainFrame.setVisible(true);  
-   }
-    
-   private void printMsg(){
+        //german
+        constraints = new GridBagConstraints();
+        german.setPreferredSize(new Dimension(140, 25));
+        constraints.anchor = GridBagConstraints.PAGE_START;
+        constraints.insets = new Insets(10, 10, 10, 10);
+        controlPanel.add(german, constraints);
 
-      JButton deutsch = new JButton("Deutsch");        
-      JButton english = new JButton("English");
-      JButton francais = new JButton("Français");
-      francais.setHorizontalTextPosition(SwingConstants.LEFT);   
+        //english
+        constraints.gridy = 1;
+        english.setPreferredSize(new Dimension(140, 25));
+        controlPanel.add(english, constraints);
 
-      deutsch.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            msgLabel.setText("Guten Tag!");
-         }          
-      });
+        //french
+        constraints.gridy = 2;
+        french.setPreferredSize(new Dimension(140, 25));
+        controlPanel.add(french, constraints);
+         
+        //msn
+        msgLabel.setPreferredSize(new Dimension(140, 25));
+        msgPanel.add(msgLabel, constraints);
 
-      english.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            msgLabel.setText("Good Day!");
-         }
-      });
+        //quit
+        constraints.gridy = 0;
+        constraints.weightx = 0.1;
+        quit.setPreferredSize(new Dimension(140, 25));
+        constraints.anchor = GridBagConstraints.EAST;
+        buttonPanel.add(quit, constraints);
 
-      francais.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            msgLabel.setText("Bon Jour!");
-         }
-      });
+        ActionListener listener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) { 
+                if (e.getSource().equals(german)) {
+                    msgLabel.setText("Guten Tag!");
+                } else if (e.getSource().equals(english)) {
+                    msgLabel.setText("Good day!");
+                } else if (e.getSource().equals(french)) {
+                    msgLabel.setText("Bon Jour!");
+                } else {
+                    System.exit(0);
+                } 
+            }
+        };
 
-      deutsch.setAlignmentX(Component.CENTER_ALIGNMENT);
-      english.setAlignmentX(Component.CENTER_ALIGNMENT);
-      francais.setAlignmentX(Component.CENTER_ALIGNMENT);
-      controlPanel.add(deutsch);
-      controlPanel.add(english);
-      controlPanel.add(francais);       
+        german.addActionListener(listener);
+        english.addActionListener(listener);
+        french.addActionListener(listener);
+        quit.addActionListener(listener);
+    }
 
-      mainFrame.setVisible(true);  
-   }
+    public static void main(String[] args) {
+        HelloWorldGraphical app = new HelloWorldGraphical();
+        app.setVisible(true);
+    }
 }
