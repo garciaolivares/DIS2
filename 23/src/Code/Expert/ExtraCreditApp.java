@@ -25,8 +25,16 @@ public class ExtraCreditApp extends JFrame {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.setColor(Color.red); 
-            g.drawLine(startPoint.x , startPoint.y, startPoint.y - endPoint.x, startPoint.y); 
+            g.setColor(Color.blue); 
+            
+            
+            if(endPoint.y < startPoint.y){ 
+                g.drawLine(0 , 300, startPoint.y - endPoint.y , 300); 
+            }
+            if(endPoint.y > startPoint.y){ 
+                g.drawLine(0 , 300,  endPoint.y - startPoint.y , 300); 
+            }
+             
         }
 
         public void setStart(Point startPoint) {
@@ -52,6 +60,7 @@ public class ExtraCreditApp extends JFrame {
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(java.awt.event.MouseEvent e) { 
+                //System.out.println("End "+e.getLocationOnScreen());
                 myWidget.setEnd(e.getPoint());
             }
         });
@@ -59,12 +68,13 @@ public class ExtraCreditApp extends JFrame {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                //System.out.println("Start "+e.getPoint());
                 myWidget.setStart(e.getPoint());
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                //myWidget.setStart(new Point(0, 0));
+                myWidget.setStart(new Point(0, 0));
             }
         });
 
