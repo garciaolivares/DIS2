@@ -7,21 +7,17 @@ public class WindowSystem extends GraphicsEventSystem{
 	double width, height;
 	float StartX, StartY, EndX, EndY;
 	
-    public WindowSystem(int i, int j, float StartX, float StartY, float EndX, float EndY) {
+    public WindowSystem(int i, int j) {
         super(i, j);
         width = (double)i;
         height = (double)j;
-        this.StartX = StartX;
-        this.StartY = StartY;
-        this.EndX = EndX;
-        this.EndY = EndY;
         
     }
          
     @Override
     protected void handlePaint() {
     	
-    	this.drawLine(this.StartX, this.StartY, this.EndX, this.EndY );
+    	this.drawLine(0.2f, 0.3f, 0.8f, 0.7f);
     }
     
     public void drawLine(float StartX, float StartY, float EndX, float EndY){
