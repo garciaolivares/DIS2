@@ -1,7 +1,5 @@
 package Code.Expert;
 
-package code.Expert;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,7 +8,6 @@ import java.awt.Point;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-
  
 public class ExtraCreditApp extends JFrame { 
 
