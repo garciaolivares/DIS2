@@ -8,21 +8,22 @@ import java.awt.Point;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+
  
 public class ExtraCreditApp extends JFrame { 
 
     private final class Widget extends JComponent {
 
         int height;
-        int widht;
+        int width;
 
         Point startPoint = new Point(0, 0); //Start line's coordinates
         Point endPoint = new Point(0, 0); //End line's coordinates
         
         public Widget(int h, int w){ // initialize contructor
             this.setPreferredSize(new Dimension(h, w));
-            height = h;
-            widht = w;
+            height = h; // get height of the widget
+            width = w; // get width of the widget
         }
 
         @Override
@@ -36,6 +37,7 @@ public class ExtraCreditApp extends JFrame {
             this.endPoint.y = height; 
             this.startPoint.x = 0;
             this.startPoint.y = this.endPoint.x = 280;
+            this.setMaximumSize(new Dimension(600,600)); 
             repaint(); // fires method paint Componet
         }
 
@@ -46,7 +48,8 @@ public class ExtraCreditApp extends JFrame {
     }
 
     public ExtraCreditApp() {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // terminates program by clicking close button 
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // terminates program by clicking close button
+        this.setResizable(false); // Avoid window resizing
         Widget myWidget = new Widget(600, 600);  // creates component
         myWidget.setStart(); // Initializes start coordinates
         this.add(myWidget, BorderLayout.CENTER); // adds myWidget in main frame

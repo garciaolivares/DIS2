@@ -14,7 +14,7 @@ public class WindowSystem extends GraphicsEventSystem {
         // define width and height of our desktop with values i and j
         width = (double) i;
         height = (double) j;
-        // 
+        // add window in the hashtable in order to keep tracking of it
         addWindow();
     }
 
