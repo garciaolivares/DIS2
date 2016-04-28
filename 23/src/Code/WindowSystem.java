@@ -1,4 +1,5 @@
-package Code;
+package Code; 
+
 import de.rwth.hci.Graphics.GraphicsEventSystem;
 import java.awt.Color;
 import java.util.Hashtable;
@@ -18,8 +19,8 @@ public class WindowSystem extends GraphicsEventSystem {
         addWindow();
     }
 
-    public void addWindow() {
-        SimpleWindow w = new SimpleWindow();
+    final void addWindow() {
+        SimpleWindow w = new SimpleWindow(0,0,windows.size());
         windows.put(w.toString(), w);
     }
 
