@@ -1,14 +1,38 @@
 package Code;
-
 public class SimpleWindow {
-    
-    public int zDepth = 0;
-    public int locationX = 0;
-    public int locationY = 0;
-    
-    public SimpleWindow(int x , int y, int z){
+
+    private int locationX = 0;
+    private int locationY = 0;
+    private int locationZ = 0;
+
+    public SimpleWindow(int x, int y, int z) {
         locationX = x;
         locationY = y;
-        zDepth = z;
+        locationZ = z;
     }
+
+    int getX() {
+        return locationX;
+    }
+
+    void setX(int x) {
+        this.locationX = x;
+    }
+
+    int getY() {
+        return locationY;
+    }
+
+    void setY(int y) {
+        this.locationY = y;
+    }
+
+    int getZ() {
+        return locationZ;
+    }
+
+    void setZ(int z) {
+        this.locationZ = z;
+    }
+
 }
