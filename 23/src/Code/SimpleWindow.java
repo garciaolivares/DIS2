@@ -7,6 +7,7 @@ public class SimpleWindow {
     private int locationZ = 0; //attibute for depth in z-axis
     private int width = 0; //attribute for window's width
     private int height = 0; //attribute for window's height
+    private String title = ""; //attribute for window's title
 
     public SimpleWindow(int xPosition, int yPosition, int zDepth) {
         locationX = xPosition;
@@ -15,11 +16,28 @@ public class SimpleWindow {
     }
 
     public SimpleWindow(int xPosition, int yPosition, int zDepth, int width, int height) {
-        locationX = xPosition;
-        locationY = yPosition;
-        locationZ = zDepth;
+        this.locationX = xPosition;
+        this.locationY = yPosition;
+        this.locationZ = zDepth;
         this.width = width;
         this.height = height;
+    }
+    
+    public SimpleWindow(int xPosition, int yPosition, int zDepth, int width, int height, String title) {
+        this.locationX = xPosition;
+        this.locationY = yPosition;
+        this.locationZ = zDepth;
+        this.width = width;
+        this.height = height;
+        this.title = title;
+    }
+    
+    String getTitle(){
+        return this.title;
+    }
+    
+    public void setTitle(String title){
+        this.title = title;
     }
 
     //getters and setters for x position
@@ -68,4 +86,3 @@ public class SimpleWindow {
     }
 
 }
-
