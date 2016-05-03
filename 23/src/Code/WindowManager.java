@@ -1,4 +1,4 @@
-package Code;
+package Code; 
 
 import java.awt.Color;
 import java.util.Iterator;
@@ -42,8 +42,11 @@ public class WindowManager extends WindowSystem {
     }
     
     @Override
-    public void handleMouseDragged(int x, int y) {
-        windowSetPosition(x, y, windows.get(findWindow(x, y)));
+    public void handleMouseDragged(int x, int y) { 
+        String key = findWindow(x, y);
+        if(!key.equals("")){ 
+            windowSetPosition(x, y, windows.get(key));
+        }
     }
     
     @Override
@@ -51,28 +54,26 @@ public class WindowManager extends WindowSystem {
     }
     
     public String findWindow(int x, int y) {
-        String key = "";
+        String window = "";
         
         Iterator<String> keySetIterator = windows.keySet().iterator();
         while (keySetIterator.hasNext()) {
-            key = keySetIterator.next();
+            String key = keySetIterator.next();
             
             if ((windows.get(key).getX() < x) && (windows.get(key).getY() < x)
                     && (windows.get(key).getX() + windows.get(key).getWidth() > x)
-                    && (windows.get(key).getY() + windows.get(key).getHeight() > y)) {
-                
-                System.out.println(windows.get(key).getTitle());
-                
+                    && (windows.get(key).getY() + windows.get(key).getHeight() > y)) { 
+                window = key;
             } else {
                 
             }
             
         }
         
-        return key;
+        return window;
     }
     
-    public void windowSetPosition(int x, int y, SimpleWindow window) {
+    public void windowSetPosition(int x, int y, SimpleWindow window) { 
         window.setX(x);
         window.setY(y);
         requestRepaint();
