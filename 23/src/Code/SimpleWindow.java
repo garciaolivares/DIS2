@@ -9,6 +9,8 @@ public class SimpleWindow {
     private int height = 0; //attribute for window's height
     private String title = ""; //attribute for window's title
 
+    public SimpleWindow(){}
+    
     public SimpleWindow(int xPosition, int yPosition, int zDepth) {
         locationX = xPosition;
         locationY = yPosition;
