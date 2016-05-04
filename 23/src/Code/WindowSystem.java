@@ -32,7 +32,8 @@ public class WindowSystem extends GraphicsEventSystem {
 
     @Override
     protected void handlePaint() {
-        // Draw stored windows
+        
+       // Draw stored windows
         Set<String> keySet = windows.keySet();
         Iterator<String> keySetIterator = keySet.iterator();
         while (keySetIterator.hasNext()) {
@@ -42,10 +43,9 @@ public class WindowSystem extends GraphicsEventSystem {
     }
 
     public void drawWindow(SimpleWindow window) {
-        super.setColor(Color.gray);
+        super.setColor(palette.lightGray());
         super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + window.getHeight());
         super.setColor(Color.black);
         super.drawRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + window.getHeight());
     }
-
 }
