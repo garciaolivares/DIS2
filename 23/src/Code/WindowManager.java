@@ -1,8 +1,6 @@
 package Code;  
 
-import java.awt.Color;
 import java.util.Iterator;
-import java.util.Set;
 
 public class WindowManager extends WindowSystem {
 
@@ -11,30 +9,49 @@ public class WindowManager extends WindowSystem {
         super.setBackground(palette.lightBlue());
     }
 
-    public void drawTitleBar(SimpleWindow window , char status) {
-        
-        if (status == 'i'){
-            
+    public void drawTitleBar(SimpleWindow window, char status) {
+        window.getTitlebar().setsX(window.getX());
+        window.getTitlebar().setsY(window.getY());
+        window.getTitlebar().seteX(window.getX() + window.getWidth());
+        window.getTitlebar().seteY(window.getY() + 22);
+        if (status == 'i') {
+
             super.setColor(palette.gray());
-            super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            super.fillRect(
+                    window.getTitlebar().getsX(),
+                    window.getTitlebar().getsY(),
+                    window.getTitlebar().geteX(),
+                    window.getTitlebar().geteY());
             super.setColor(palette.black());
-            super.drawRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            super.drawRect(
+                    window.getTitlebar().getsX(),
+                    window.getTitlebar().getsY(),
+                    window.getTitlebar().geteX(),
+                    window.getTitlebar().geteY());
             this.drawCloseButton(window, 'i');
             this.drawMinimizeButton(window, 'i');
             this.writeTitle(window);
-            
-        } else if (status == 'a'){
-            
+
+        } else if (status == 'a') {
+
             super.setColor(palette.green());
-            super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            super.fillRect(
+                    window.getTitlebar().getsX(),
+                    window.getTitlebar().getsY(),
+                    window.getTitlebar().geteX(),
+                    window.getTitlebar().geteY());
             super.setColor(palette.black());
-            super.drawRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            super.drawRect(
+                    window.getTitlebar().getsX(),
+                    window.getTitlebar().getsY(),
+                    window.getTitlebar().geteX(),
+                    window.getTitlebar().geteY());
             this.drawCloseButton(window, 'a');
             this.drawMinimizeButton(window, 'a');
             this.writeTitle(window);
-            
+
         }
-        
+
     }
 
     public void writeTitle(SimpleWindow window) {
@@ -43,38 +60,59 @@ public class WindowManager extends WindowSystem {
     }
 
     public void drawCloseButton(SimpleWindow window, char status) {
-        
-        if (status == 'a'){
+
+        window.getCloseButton().setsX(window.getX() + window.getWidth() - 28);
+        window.getCloseButton().setsY(window.getY() + 2);
+        window.getCloseButton().seteX(window.getX() + window.getWidth() - 2);
+        window.getCloseButton().seteY(window.getY() + 20);
+
+        if (status == 'a') {
             super.setColor(palette.red());
-            super.fillRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.fillRect(
+                    window.getCloseButton().getsX(),
+                    window.getCloseButton().getsY(),
+                    window.getCloseButton().geteX(),
+                    window.getCloseButton().geteY());
             super.setColor(palette.black());
-            super.drawRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.drawRect(
+                    window.getCloseButton().getsX(),
+                    window.getCloseButton().getsY(),
+                    window.getCloseButton().geteX(),
+                    window.getCloseButton().geteY());
             super.setColor(palette.white());
             super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
-        
+
         } else {
-        
+
             super.setColor(palette.darkGray());
-            super.fillRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.fillRect(
+                    window.getCloseButton().getsX(),
+                    window.getCloseButton().getsY(),
+                    window.getCloseButton().geteX(),
+                    window.getCloseButton().geteY());
             super.setColor(palette.black());
-            super.drawRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.drawRect(
+                    window.getCloseButton().getsX(),
+                    window.getCloseButton().getsY(),
+                    window.getCloseButton().geteX(),
+                    window.getCloseButton().geteY());
             super.setColor(palette.white());
             super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
         }
     }
 
     public void drawMinimizeButton(SimpleWindow window, char status) {
-        
-        if (status == 'a'){
+
+        if (status == 'a') {
             super.setColor(palette.yellow());
             super.fillRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
             super.setColor(palette.black());
             super.drawRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
             super.setColor(palette.white());
             super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
-        
-        }else{
-        
+
+        } else {
+
             super.setColor(palette.darkGray());
             super.fillRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
             super.setColor(palette.black());
@@ -83,8 +121,8 @@ public class WindowManager extends WindowSystem {
             super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
         }
     }
-    
-    public void setActiveWindow(SimpleWindow w){
+
+    public void setActiveWindow(SimpleWindow w) {
         windows.remove(w);
         windows.add(w);
     }
@@ -95,21 +133,37 @@ public class WindowManager extends WindowSystem {
     private int xClicked, yClicked = 0;
 
     @Override
-    public void handleMouseDragged(int x, int y) { 
-            y -=23; 
-            x -=1 ;  
-            if (mousePressed && mouseDragging) {
-                windowSetPosition(x, y, activeWindow);
-            } else {
-                SimpleWindow key = findWindow(x, y);
-                if (windows.contains(key)) {
-                    setActiveWindow(key);
-                    activeWindow = key;
-                    mouseDragging = true;
-                    windowSetPosition(x, y, key);
-                }
+    public void handleMouseDragged(int x, int y) {
+        y -= 23;
+        x -= 1;
+        if (mousePressed && mouseDragging) {
+            windowSetPosition(x, y, activeWindow);
+        } else {
+            SimpleWindow key = findWindow(x, y);
+            if (windows.contains(key) && isInsideTitleBar(x, y, key)) {
+                setActiveWindow(key);
+                activeWindow = key;
+                mouseDragging = true;
+                windowSetPosition(x, y, key);
             }
+        }
+    }
 
+    public boolean isInsideTitleBar(int x, int y, SimpleWindow w) {
+        if ((x > w.getTitlebar().getsX() && x < w.getTitlebar().geteX())
+                && (y > w.getTitlebar().getsY() && y < w.getTitlebar().geteY())) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isInsideCloseButton(int x, int y, SimpleWindow w) {
+
+        if ((x > w.getCloseButton().getsX() && x < w.getCloseButton().geteX())
+                && (y > w.getCloseButton().getsY() && y < w.getCloseButton().geteY())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -128,28 +182,36 @@ public class WindowManager extends WindowSystem {
 
     @Override
     public void handleMouseClicked(int x, int y) {
-        
+        y -= 23;
+        x -= 1;
         SimpleWindow key = findWindow(x, y);
+
         if (windows.contains(key)) {
             setActiveWindow(key);
             activeWindow = key;
             requestRepaint();
+
+            if (isInsideCloseButton(x, y, activeWindow)) {
+                windows.remove(key);
+                requestRepaint();
+            }
         }
-       
+
     }
 
     public SimpleWindow findWindow(int x, int y) {
         SimpleWindow window = new SimpleWindow();
-        
-         for (SimpleWindow w : windows) {
-           if ((w.getX() < x) && (w.getY() < y)
+
+        for (SimpleWindow w : windows) {
+            if ((w.getX() < x) && (w.getY() < y)
                     && (w.getX() + w.getWidth() > x)
                     && (w.getY() + w.getHeight() > y)) {
                 window = w;
-            }  
-        } 
+            }
+        }
         return window;
     }
+
     public void windowSetPosition(int x, int y, SimpleWindow window) {
 
         if (x > this.width) {
@@ -174,15 +236,15 @@ public class WindowManager extends WindowSystem {
     protected void handlePaint() {
         super.setBackground(palette.lightBlue());
         //Draw stored windows 
-        
+
         char status = 'i';
         for (SimpleWindow w : windows) {
             super.drawWindow(w);
-            
-            if(w == activeWindow){
-                 status = 'a';
-            } 
-            this.drawTitleBar(w, status);       
+
+            if (w == activeWindow) {
+                status = 'a';
+            }
+            this.drawTitleBar(w, status);
         }
     }
 

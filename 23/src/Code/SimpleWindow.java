@@ -1,5 +1,7 @@
 package Code;
 
+import java.util.Comparator;
+
 public class SimpleWindow {
 
     private int locationX = 0; //attibute for position in x-axis
@@ -8,9 +10,12 @@ public class SimpleWindow {
     private int width = 0; //attribute for window's width
     private int height = 0; //attribute for window's height
     private String title = ""; //attribute for window's title
-
-    public SimpleWindow(){}
     
+    private Component titlebar = new Component();
+    private Component closeButton = new Component();
+    
+    public SimpleWindow(){}
+
     public SimpleWindow(int xPosition, int yPosition, int zDepth) {
         locationX = xPosition;
         locationY = yPosition;
@@ -85,6 +90,22 @@ public class SimpleWindow {
 
     int getHeight() {
         return this.height;
+    }
+   
+    public Component getTitlebar() {
+        return titlebar;
+    }
+
+    public void setTitlebar(Component titlebar) {
+        this.titlebar = titlebar;
+    }
+
+    public Component getCloseButton() {
+        return closeButton;
+    }
+
+    public void setCloseButton(Component closeButton) {
+        this.closeButton = closeButton;
     }
 
 }

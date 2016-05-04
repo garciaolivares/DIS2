@@ -1,5 +1,4 @@
 package Code;
-
 import de.rwth.hci.Graphics.GraphicsEventSystem; 
 import java.util.ArrayList;  
 
@@ -12,8 +11,7 @@ public class WindowSystem extends GraphicsEventSystem {
     //initialization 
     public WindowSystem(int i, int j) {
         // call parent class to draw our "desktop" with size ixj 
-        super(i, j);
-
+        super(i, j); 
         // define width and height of our desktop with values i and j
         width = (double) i;
         height = (double) j;
