@@ -11,14 +11,30 @@ public class WindowManager extends WindowSystem {
         super.setBackground(palette.lightBlue());
     }
 
-    public void drawTitleBar(SimpleWindow window) {
-        super.setColor(palette.gray());
-        super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
-        super.setColor(palette.black());
-        super.drawRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
-        this.drawCloseButton(window);
-        this.drawMinimizeButton(window);
-        this.writeTitle(window);
+    public void drawTitleBar(SimpleWindow window , char status) {
+        
+        if (status == 'i'){
+            
+            super.setColor(palette.gray());
+            super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            super.setColor(palette.black());
+            super.drawRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            this.drawCloseButton(window, 'i');
+            this.drawMinimizeButton(window, 'i');
+            this.writeTitle(window);
+            
+        } else if (status == 'a'){
+            
+            super.setColor(palette.green());
+            super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            super.setColor(palette.black());
+            super.drawRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + 22);
+            this.drawCloseButton(window, 'a');
+            this.drawMinimizeButton(window, 'a');
+            this.writeTitle(window);
+            
+        }
+        
     }
 
     public void writeTitle(SimpleWindow window) {
@@ -26,22 +42,51 @@ public class WindowManager extends WindowSystem {
         super.drawString(window.getTitle(), window.getX() + 8, window.getY() + 16);
     }
 
-    public void drawCloseButton(SimpleWindow window) {
-        super.setColor(palette.darkGray());
-        super.fillRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
-        super.setColor(palette.black());
-        super.drawRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
-        super.setColor(palette.white());
-        super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
+    public void drawCloseButton(SimpleWindow window, char status) {
+        
+        if (status == 'a'){
+            super.setColor(palette.red());
+            super.fillRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.setColor(palette.black());
+            super.drawRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.setColor(palette.white());
+            super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
+        
+        } else {
+        
+            super.setColor(palette.darkGray());
+            super.fillRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.setColor(palette.black());
+            super.drawRect(window.getX() + window.getWidth() - 28, window.getY() + 2, window.getX() + window.getWidth() - 2, window.getY() + 20);
+            super.setColor(palette.white());
+            super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
+        }
     }
 
-    public void drawMinimizeButton(SimpleWindow window) {
-        super.setColor(palette.darkGray());
-        super.fillRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
-        super.setColor(palette.black());
-        super.drawRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
-        super.setColor(palette.white());
-        super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
+    public void drawMinimizeButton(SimpleWindow window, char status) {
+        
+        if (status == 'a'){
+            super.setColor(palette.yellow());
+            super.fillRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
+            super.setColor(palette.black());
+            super.drawRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
+            super.setColor(palette.white());
+            super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
+        
+        }else{
+        
+            super.setColor(palette.darkGray());
+            super.fillRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
+            super.setColor(palette.black());
+            super.drawRect(window.getX() + window.getWidth() - 58, window.getY() + 2, window.getX() + window.getWidth() - 30, window.getY() + 20);
+            super.setColor(palette.white());
+            super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
+        }
+    }
+    
+    public void setActiveWindow(SimpleWindow w){
+        windows.remove(w);
+        windows.add(w);
     }
 
     private boolean mousePressed = false;
@@ -58,6 +103,7 @@ public class WindowManager extends WindowSystem {
             } else {
                 SimpleWindow key = findWindow(x, y);
                 if (windows.contains(key)) {
+                    setActiveWindow(key);
                     activeWindow = key;
                     mouseDragging = true;
                     windowSetPosition(x, y, key);
@@ -82,10 +128,14 @@ public class WindowManager extends WindowSystem {
 
     @Override
     public void handleMouseClicked(int x, int y) {
-        xClicked = x;
-        yClicked = y;
-        System.out.println("xc =" + x);
-        System.out.println("yc =" + y);
+        
+        SimpleWindow key = findWindow(x, y);
+        if (windows.contains(key)) {
+            setActiveWindow(key);
+            activeWindow = key;
+            requestRepaint();
+        }
+       
     }
 
     public SimpleWindow findWindow(int x, int y) {
@@ -123,12 +173,17 @@ public class WindowManager extends WindowSystem {
     @Override
     protected void handlePaint() {
         super.setBackground(palette.lightBlue());
-        //Draw stored windows  
+        //Draw stored windows 
+        
+        char status = 'i';
         for (SimpleWindow w : windows) {
             super.drawWindow(w);
-            this.drawTitleBar(w);
+            
+            if(w == activeWindow){
+                 status = 'a';
+            } 
+            this.drawTitleBar(w, status);       
         }
-
     }
 
     public void sortWindows(Iterator<String> keySetIterator) {
