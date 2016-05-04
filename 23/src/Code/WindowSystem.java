@@ -1,16 +1,13 @@
 package Code;
 
-import de.rwth.hci.Graphics.GraphicsEventSystem;
-import java.awt.Color;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
+import de.rwth.hci.Graphics.GraphicsEventSystem; 
+import java.util.ArrayList;  
 
 public class WindowSystem extends GraphicsEventSystem {
 
     double width, height;
-    public Palette palette = new Palette();
-    Hashtable<String, SimpleWindow> windows; // creat hash table that stores created windows
+    public Palette palette = new Palette(); 
+    ArrayList<SimpleWindow> windows;
 
     //initialization 
     public WindowSystem(int i, int j) {
@@ -21,31 +18,27 @@ public class WindowSystem extends GraphicsEventSystem {
         width = (double) i;
         height = (double) j;
         // initialize hash table that stores created windows
-        windows = new Hashtable<String, SimpleWindow>();
+        windows  = new ArrayList();
 
     }
 
-    public void addWindow(SimpleWindow window) {
-         
-        windows.put(window.toString(), window);
+    public void addWindow(SimpleWindow window) { 
+        windows.add(window);
     }
 
     @Override
-    protected void handlePaint() {
-        
+    protected void handlePaint() { 
        // Draw stored windows
-        Set<String> keySet = windows.keySet();
-        Iterator<String> keySetIterator = keySet.iterator();
-        while (keySetIterator.hasNext()) {
-            String key = keySetIterator.next();
-            this.drawWindow(windows.get(key));
+          for (SimpleWindow w : windows) {
+             this.drawWindow(w);
+             System.out.println("sopas!");
         }
     }
 
     public void drawWindow(SimpleWindow window) {
         super.setColor(palette.lightGray());
         super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + window.getHeight());
-        super.setColor(Color.black);
+        super.setColor(palette.black());
         super.drawRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + window.getHeight());
     }
 }
