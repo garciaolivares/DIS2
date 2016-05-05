@@ -1,16 +1,19 @@
 package Code.Expert;
+import de.rwth.hci.Graphics.GraphicsEventSystem;
+import java.util.ArrayList;
 
-import code.*;
-import de.rwth.hci.Graphics.GraphicsEventSystem; 
-import java.util.ArrayList;  
+/* WindowSystem Class
+ * Basic windows task, draw desktop and simple window
+ * 
+ * */
 
 public class WindowSystem extends GraphicsEventSystem {
 
     double width, height;
-    public Palette palette = new Palette(); 
-    public ArrayList<SimpleWindow> windows;
-    public int xError = 3;
-    public int yError = 33;
+    public Palette palette = new Palette(); //object Palette to call personalized colors
+    public ArrayList<SimpleWindow> windows; //data structure for our collection of Simple Window objects
+    public int xError = 1;
+    public int yError = 23;
 
     //initialization 
     public WindowSystem(int i, int j) {
@@ -19,13 +22,14 @@ public class WindowSystem extends GraphicsEventSystem {
         // define width and height of our desktop with values i and j
         width = (double) i;
         height = (double) j;
-        // initialize hash table that stores created windows
+     // initialize arraylist that stores created windows
         windows  = new ArrayList();
 
     }
 
+  //Method to add a new Window
     public void addWindow(SimpleWindow window) { 
-        windows.add(window);
+        windows.add(window); //Add SimpleWindow object to our collection
     }
 
     @Override
@@ -36,6 +40,7 @@ public class WindowSystem extends GraphicsEventSystem {
         }
     }
 
+  //Method to draw a new Window (basic one, no look and feel only plain box)
     public void drawWindow(SimpleWindow window) {
         super.setColor(palette.lightGray());
         super.fillRect(window.getX(), window.getY(), window.getX() + window.getWidth(), window.getY() + window.getHeight());

@@ -1,9 +1,13 @@
-package Code.Expert; 
+package Code.Expert;
 import java.awt.Color;
 
+/*Palette class 
+ * Define colors to be used by components and attributes of the desktop and windows
+ * */
 
 public class Palette {
     
+	//Colors with specified RGB values in the range (0 - 255)
     private Color black = new Color(0,0,0);
     private Color white = new Color(255,255,255);
     private Color gray = new Color(128,128,128);
@@ -16,6 +20,7 @@ public class Palette {
     private Color lightGray = new Color(242,242,243);
     private Color darkGray = new Color(112,112,112);
     
+  //Methods to call the value of a color from the other classes
     private Color purple = new Color(80,70,125);
     private Color darkPurple = new Color(42,45,60);
     private Color lightPurple = new Color(99,104,127);

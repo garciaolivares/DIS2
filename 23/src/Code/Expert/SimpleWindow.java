@@ -1,5 +1,8 @@
 package Code.Expert;
 
+/* Simple Window class
+ * Collection of Windows and its properties
+ * */
 public class SimpleWindow {
 
     private int locationX = 0; //attibute for position in x-axis
@@ -8,22 +11,29 @@ public class SimpleWindow {
     private int width = 0; //attribute for window's width
     private int height = 0; //attribute for window's height
     private String title = ""; //attribute for window's title
-    private boolean visible = true;
+    private boolean visible = true; //flag to set visibility of window
 
-    private Component titlebar = new Component();
-    private Component closeButton = new Component();
-    private Component minimizeButton = new Component();
-    private Component icon = new Component();
-
+    private Component titlebar = new Component(); //titlebar component of the window
+    private Component closeButton = new Component(); //close button component of the window
+    private Component minimizeButton = new Component(); //minimize button component of the window
+    private Component icon = new Component(); //icon component of the window (when is minimized)
+    
+    /*
+     * Set of constructors
+     */
+    
+    //empty constructor
     public SimpleWindow() {
     }
 
+  //constructor with x,y and z coordinates
     public SimpleWindow(int xPosition, int yPosition, int zDepth) {
         locationX = xPosition;
         locationY = yPosition;
         locationZ = zDepth;
     }
 
+  //constructor with x,y and z coordinates as well as parameters for width and height
     public SimpleWindow(int xPosition, int yPosition, int zDepth, int width, int height) {
         this.locationX = xPosition;
         this.locationY = yPosition;
@@ -32,6 +42,7 @@ public class SimpleWindow {
         this.height = height;
     }
 
+  //constructor with x,y and z coordinates,parameters for width and height and Title name
     public SimpleWindow(int xPosition, int yPosition, int zDepth, int width, int height, String title) {
         this.locationX = xPosition;
         this.locationY = yPosition;
@@ -41,6 +52,10 @@ public class SimpleWindow {
         this.title = title;
     }
 
+    /*
+     * Set and get for all attributes and components
+     */
+  //getters and setters for Title name
     String getTitle() {
         return this.title;
     }
@@ -94,6 +109,7 @@ public class SimpleWindow {
         return this.height;
     }
 
+  //getters and setters for Component of Window: Title Bar
     public Component getTitlebar() {
         return titlebar;
     }
@@ -102,6 +118,7 @@ public class SimpleWindow {
         this.titlebar = titlebar;
     }
 
+  //getters and setters for Component of Window: Close Button
     public Component getCloseButton() {
         return closeButton;
     }
@@ -110,6 +127,7 @@ public class SimpleWindow {
         this.closeButton = closeButton;
     }
 
+  //getters and setters for Component of Window: Minimize Button
     public Component getMinimizeButton() {
         return minimizeButton;
     }
@@ -118,14 +136,17 @@ public class SimpleWindow {
         this.minimizeButton = minimizeButton;
     }
 
+    //Call of visible flag
     public boolean isVisible() {
         return visible;
     }
 
+    //Set visibility of window
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
     
+  //getters and setters for Component of Window: Icon
     public Component getIcon() {
         return icon;
     }

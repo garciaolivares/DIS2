@@ -1,43 +1,54 @@
 package Code.Expert;
 
-import code.*;
-import java.util.Iterator;
+/* WindowManages Class
+ * Look and feel window and its components
+ * mouse actions/events
+ * */
 
+//initialization
 public class WindowManager extends WindowSystem {
 
-    Dock dock = new Dock();
+    Dock dock = new Dock();// Call to create dock
 
     public WindowManager(int i, int j) {
         super(i, j);
-        super.setBackground(palette.lightBlue());
+        super.setBackground(palette.purple());
 
     }
 
+  //draw titlebar
     public void drawTitleBar(SimpleWindow window, char status) {
+    	
+    	//set titlebar attributes starting/ending x,y coordinates
         window.getTitlebar().setsX(window.getX());
         window.getTitlebar().setsY(window.getY());
         window.getTitlebar().seteX(window.getX() + window.getWidth());
         window.getTitlebar().seteY(window.getY() + 22);
 
+      //check status active/inactive window
         if (status == 'i') {
+        	//if inactive shades of gray
             super.setColor(palette.gray());
-            fillComponent(window.getTitlebar());
+            fillComponent(window.getTitlebar()); //use attributes/coordinates to fill
             super.setColor(palette.black());
-            drawComponent(window.getTitlebar());
+            drawComponent(window.getTitlebar()); //use attributes/coordinates to draw
             this.drawCloseButton(window, 'i');
-            this.drawMinimizeButton(window, 'i');
-            this.writeTitle(window);
+            this.drawMinimizeButton(window, 'i'); //draw close button
+            this.writeTitle(window); //write title string
+            
         } else if (status == 'a') {
+        	//if active colors
             super.setColor(palette.darkPurple());
-            fillComponent(window.getTitlebar());
+            fillComponent(window.getTitlebar()); //use attributes/coordinates to fill
 //            super.setColor(palette.black());
-//            drawComponent(window.getTitlebar());
+//            drawComponent(window.getTitlebar()); //use attributes/coordinates to draw
             this.drawCloseButton(window, 'a');
-            this.drawMinimizeButton(window, 'a');
-            this.writeTitle(window);
+            this.drawMinimizeButton(window, 'a'); //draw close button
+            this.writeTitle(window); //write title string
         }
     }
 
+ // Writes Title String
     public void writeTitle(SimpleWindow window) {
         super.setColor(palette.lightGray());
         String title = window.getTitle();
@@ -46,66 +57,83 @@ public class WindowManager extends WindowSystem {
         super.drawString(title, window.getX() + 8, window.getY() + 16);
     }
 
+ // Draws Close button
     public void drawCloseButton(SimpleWindow window, char status) {
+    	
+    	//set button attributes starting/ending x,y coordinates
         window.getCloseButton().setsX(window.getX() + window.getWidth() - 28);
         window.getCloseButton().setsY(window.getY() + 2);
         window.getCloseButton().seteX(window.getX() + window.getWidth() - 2);
         window.getCloseButton().seteY(window.getY() + 20);
 
+      //check status active/inactive window
         if (status == 'a') {
+        	//if active colors
             super.setColor(palette.salmon());
-            fillComponent(window.getCloseButton());
+            fillComponent(window.getCloseButton()); //use attributes/coordinates to fill
             super.setColor(palette.white());
-//            drawComponent(window.getCloseButton());
+//            drawComponent(window.getCloseButton()); //use attributes/coordinates to draw
 //            super.setColor(palette.white());
             super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
         } else {
+        	//if inactive gray
             super.setColor(palette.darkGray());
-            fillComponent(window.getCloseButton());
+            fillComponent(window.getCloseButton()); //use attributes/coordinates to fill
             super.setColor(palette.black());
-            drawComponent(window.getCloseButton());
+            drawComponent(window.getCloseButton()); //use attributes/coordinates to draw
             super.setColor(palette.white());
             super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
         }
     }
 
+ // Draws Minimize button
     public void drawMinimizeButton(SimpleWindow window, char status) {
+    	
+    	//set button attributes starting/ending x,y coordinates
         window.getMinimizeButton().setsX(window.getX() + window.getWidth() - 58);
         window.getMinimizeButton().setsY(window.getY() + 2);
         window.getMinimizeButton().seteX(window.getX() + window.getWidth() - 30);
         window.getMinimizeButton().seteY(window.getY() + 20);
 
+      //check status active/inactive window
         if (status == 'a') {
+        	//if active colors
             super.setColor(palette.lightPurple());
-            fillComponent(window.getMinimizeButton());
+            fillComponent(window.getMinimizeButton()); //use attributes/coordinates to fill
 //            super.setColor(palette.black());
-//            drawComponent(window.getMinimizeButton());
+//            drawComponent(window.getMinimizeButton()); //use attributes/coordinates to draw
             super.setColor(palette.white());
             super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
 
         } else {
+        	//if inactive gray
             super.setColor(palette.darkGray());
-            fillComponent(window.getMinimizeButton());
+            fillComponent(window.getMinimizeButton()); //use attributes/coordinates to fill
             super.setColor(palette.black());
-            drawComponent(window.getMinimizeButton());
+            drawComponent(window.getMinimizeButton()); //use attributes/coordinates to draw
             super.setColor(palette.white());
             super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
         }
     }
 
+    // Draw dock
     public void drawDock() {
+    	//set dock attributes
         dock.setsX(0);
         dock.setsY((int) this.height - 80);
         dock.seteX((int) this.width);
         dock.seteY((int) this.height);
         super.setColor(palette.alfaGray());
-        super.fillRect(dock.getsX(), dock.getsY(), dock.geteX(), dock.geteY());
+        super.fillRect(dock.getsX(), dock.getsY(), dock.geteX(), dock.geteY()); //draw 
     }
 
+    //Draw icon
     public void drawIcon(int pos) {
+    	//size and separation between icons
         int sizeIcon = (((int) width - 10 - (2 * xError)) / dock.getIcons().size());
         sizeIcon = (sizeIcon > 200) ? 200 : sizeIcon;
-
+        
+        //set Icon attributes
         dock.getIcons().get(pos).setsX((pos) * sizeIcon + 10);
         dock.getIcons().get(pos).setsY((int) height - 75);
         dock.getIcons().get(pos).seteX(((pos) * sizeIcon) + sizeIcon);
@@ -113,17 +141,17 @@ public class WindowManager extends WindowSystem {
 
         super.setColor(palette.gray());
         super.fillRect(dock.getIcons().get(pos).getsX(),
-                dock.getIcons().get(pos).getsY(),
+                dock.getIcons().get(pos).getsY(), //use attributes to fill
                 dock.getIcons().get(pos).geteX(),
                 dock.getIcons().get(pos).geteY());
         super.setColor(palette.black());
         super.drawRect(dock.getIcons().get(pos).getsX(),
-                dock.getIcons().get(pos).getsY(),
+                dock.getIcons().get(pos).getsY(), //use attributes to draw
                 dock.getIcons().get(pos).geteX(),
                 dock.getIcons().get(pos).geteY());
 
         super.setColor(palette.white());
-        String title = dock.getIcons().get(pos).getParent().getTitle();
+        String title = dock.getIcons().get(pos).getParent().getTitle(); //match icon title with window title as well as belonging to it
         title = title.length() < Math.round(sizeIcon / 9) ? title : title.substring(0, Math.round(sizeIcon / 9)) + "...";
 
         super.drawString(title,
@@ -131,6 +159,7 @@ public class WindowManager extends WindowSystem {
                 dock.getIcons().get(pos).getsY() + 26);
     }
 
+    //Fill component with FillRect method from super
     public void fillComponent(Component Comp) {
         super.fillRect(
                 Comp.getsX(),
@@ -139,6 +168,7 @@ public class WindowManager extends WindowSystem {
                 Comp.geteY());
     }
 
+  //Draw component with drawRect method from super
     public void drawComponent(Component Comp) {
         super.drawRect(
                 Comp.getsX(),
@@ -147,12 +177,20 @@ public class WindowManager extends WindowSystem {
                 Comp.geteY());
     }
 
+ // Set active windows
     public void setActiveWindow(SimpleWindow w) {
+    	/*
+    	 * Remove object simpleWindow and re-add it to the list
+    	 * becomes topmost object and the one in front
+    	 */
         w.setVisible(true);
         windows.remove(w);
         windows.add(w);
     }
 
+    /*
+     * Set of flags for mouse actions/events as well as active window
+     */
     private boolean mousePressed = false;
     private boolean mouseDragging = false;
     private SimpleWindow activeWindow = new SimpleWindow();
@@ -161,26 +199,35 @@ public class WindowManager extends WindowSystem {
     public void handleMouseDragged(int x, int y) {
         y -= yError;
         x -= xError;
-        if (mousePressed && mouseDragging) {
-            windowSetPosition(x, y, activeWindow);
-        } else {
-            SimpleWindow key = findWindow(x, y);
-            if (windows.contains(key) && isInsideComponent(x, y, key.getTitlebar())) {
-                setActiveWindow(key);
-                activeWindow = key;
-                mouseDragging = true;
-                windowSetPosition(x, y, key);
-            }
+        
+        /*
+         * If the pointes is inside desktop window, 
+         * pressed and dragging inside selected window titlebar
+         * detect coordinates and move window accordingly
+         */
+        if ((x>=0 && x<=width)&&(y>=0 && y<=height)){
+	        if (mousePressed && mouseDragging) {
+	            windowSetPosition(x, y, activeWindow);
+	        } else {
+	            SimpleWindow key = findWindow(x, y);
+	            if (windows.contains(key) && isInsideComponent(x, y, key.getTitlebar())) {
+	                setActiveWindow(key);
+	                activeWindow = key;
+	                mouseDragging = true;
+	                windowSetPosition(x, y, key);
+	            }
+	        }
         }
     }
 
     @Override
     public void handleMousePressed(int x, int y) {
-        mousePressed = true;
+        mousePressed = true; //detects click
     }
 
     @Override
     public void handleMouseReleased(int x, int y) {
+    	//update flags and active window
         mousePressed = false;
         mouseDragging = false;
         activeWindow = new SimpleWindow();
@@ -190,18 +237,19 @@ public class WindowManager extends WindowSystem {
     public void handleMouseClicked(int x, int y) {
         y -= yError;
         x -= xError;
+        
+      //find active window and repaint if accrodingly
         SimpleWindow key = findWindow(x, y);
-
         if (windows.contains(key)) {
             setActiveWindow(key);
             activeWindow = key;
             requestRepaint();
-
+          //if close button is pressed: delete window
             if (isInsideComponent(x, y, activeWindow.getCloseButton())) {
                 windows.remove(key);
                 requestRepaint();
             }
-
+          //if min button is pressed: set icon and set visible window to false
             if (isInsideComponent(x, y, activeWindow.getMinimizeButton())) {
                 key.setVisible(false);
                 Component icon = new Component();
@@ -210,7 +258,7 @@ public class WindowManager extends WindowSystem {
                 requestRepaint();
             }
         }
-
+      //if icon is pressed: delete icon and repaint window
         if (isInsideComponent(x, y, dock)) {
             for (Component c : dock.getIcons()) {
                 if (isInsideComponent(x, y, c)) {
@@ -218,12 +266,15 @@ public class WindowManager extends WindowSystem {
                     setActiveWindow(activeWindow);
                     dock.removeIcon(c);
                     requestRepaint();
+                    break;
                 }
             }
         }
     }
 
+  //Checks if pointer is inside Component
     public boolean isInsideComponent(int x, int y, Component comp) {
+    	//compares position by coordinates
         if ((x > comp.getsX() && x < comp.geteX())
                 && (y > comp.getsY() && y < comp.geteY())) {
             return true;
@@ -231,20 +282,27 @@ public class WindowManager extends WindowSystem {
         return false;
     }
 
+  //Find specific window
     public SimpleWindow findWindow(int x, int y) {
         SimpleWindow window = new SimpleWindow();
-
+        
+      //iterate through collection of windows
         for (SimpleWindow w : windows) {
+        	//compare by attributes and return window
             if ((w.getX() < x) && (w.getY() < y)
                     && (w.getX() + w.getWidth() > x)
-                    && (w.getY() + w.getHeight() > y)) {
+                    && (w.getY() + w.getHeight() > y)
+            		&& w.isVisible()){
                 window = w;
             }
         }
         return window;
     }
-
+    
+  //Set position of window
     public void windowSetPosition(int x, int y, SimpleWindow window) {
+    	
+    	//Set position in X
         if (x > this.width) {
             window.setX((int) this.width - 10);
         } else if (x < 0) {
@@ -253,6 +311,7 @@ public class WindowManager extends WindowSystem {
             window.setX(x);
         }
 
+      //Seto position in Y
         if (y > (this.height - 90)) {
             window.setY((int) this.height - 90);
         } else if (y < 0) {
@@ -260,7 +319,8 @@ public class WindowManager extends WindowSystem {
         } else {
             window.setY(y);
         }
-        requestRepaint();
+        
+        requestRepaint(); //repaint window
     }
 
     @Override
@@ -268,20 +328,20 @@ public class WindowManager extends WindowSystem {
         super.setBackground(palette.purple());
         //Draw stored windows 
 
-        char status = 'i';
+        char status = 'i'; //active/inactive window flag
         for (SimpleWindow w : windows) {
             if (w.isVisible()) {
-                super.drawWindow(w);
+                super.drawWindow(w); //draw simple window in windowSystem
                 if (w == activeWindow) {
                     status = 'a';
                 }
-                this.drawTitleBar(w, status);
+                this.drawTitleBar(w, status); //draw Titlebar and components
             }
         }
 
-        drawDock();
+        drawDock(); //call draw dock
         for (int i = 0; i < dock.getIcons().size(); i++) {
-            drawIcon(i);
+            drawIcon(i); //call draw icons
         }
 
     }
