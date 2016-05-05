@@ -1,6 +1,4 @@
-package code.Expert;
-
-import java.util.Comparator;
+package Code.Expert;
 
 public class SimpleWindow {
 
@@ -10,12 +8,15 @@ public class SimpleWindow {
     private int width = 0; //attribute for window's width
     private int height = 0; //attribute for window's height
     private String title = ""; //attribute for window's title
-    
+    private boolean visible = true;
+
     private Component titlebar = new Component();
     private Component closeButton = new Component();
-    
-    
-    public SimpleWindow(){}
+    private Component minimizeButton = new Component();
+    private Component icon = new Component();
+
+    public SimpleWindow() {
+    }
 
     public SimpleWindow(int xPosition, int yPosition, int zDepth) {
         locationX = xPosition;
@@ -30,7 +31,7 @@ public class SimpleWindow {
         this.width = width;
         this.height = height;
     }
-    
+
     public SimpleWindow(int xPosition, int yPosition, int zDepth, int width, int height, String title) {
         this.locationX = xPosition;
         this.locationY = yPosition;
@@ -39,12 +40,12 @@ public class SimpleWindow {
         this.height = height;
         this.title = title;
     }
-    
-    String getTitle(){
+
+    String getTitle() {
         return this.title;
     }
-    
-    public void setTitle(String title){
+
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -92,7 +93,6 @@ public class SimpleWindow {
     int getHeight() {
         return this.height;
     }
-   
 
     public Component getTitlebar() {
         return titlebar;
@@ -110,4 +110,28 @@ public class SimpleWindow {
         this.closeButton = closeButton;
     }
 
+    public Component getMinimizeButton() {
+        return minimizeButton;
+    }
+
+    public void setMinimizeButton(Component minimizeButton) {
+        this.minimizeButton = minimizeButton;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
+    public Component getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Component icon) {
+        this.icon = icon;
+    }
+     
 }

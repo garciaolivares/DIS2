@@ -1,5 +1,4 @@
-package code.Expert;
-
+package Code.Expert; 
 import java.awt.Color;
 
 
@@ -14,9 +13,20 @@ public class Palette {
     private Color pink = new Color(255,0,128);
     private Color green = new Color(89,164,127);
     private Color lightBlue = new Color(0,128,255);
-    private Color lightGray = new Color(228,228,228);
+    private Color lightGray = new Color(242,242,243);
     private Color darkGray = new Color(112,112,112);
     
+    private Color purple = new Color(80,70,125);
+    private Color darkPurple = new Color(42,45,60);
+    private Color lightPurple = new Color(99,104,127);
+    private Color salmon = new Color(196,68,80);
+    private Color alfaGray = new Color(42,45,60,200);
+    
+    public Color purple(){  return purple; }
+    public Color darkPurple(){  return darkPurple; }
+    public Color lightPurple(){  return lightPurple; }
+    public Color salmon(){  return salmon; }
+    public Color alfaGray() {return alfaGray;}
     
     
     public Color black(){  return black; }

@@ -1,5 +1,6 @@
-package code.Expert;
+package Code.Expert;
 
+import code.*;
 import de.rwth.hci.Graphics.GraphicsEventSystem; 
 import java.util.ArrayList;  
 
@@ -7,7 +8,9 @@ public class WindowSystem extends GraphicsEventSystem {
 
     double width, height;
     public Palette palette = new Palette(); 
-    ArrayList<SimpleWindow> windows;
+    public ArrayList<SimpleWindow> windows;
+    public int xError = 3;
+    public int yError = 33;
 
     //initialization 
     public WindowSystem(int i, int j) {
@@ -29,8 +32,7 @@ public class WindowSystem extends GraphicsEventSystem {
     protected void handlePaint() { 
        // Draw stored windows
           for (SimpleWindow w : windows) {
-             this.drawWindow(w);
-             System.out.println("sopas!");
+             this.drawWindow(w); 
         }
     }
 
