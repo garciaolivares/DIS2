@@ -37,7 +37,6 @@ public class WindowSystem extends GraphicsEventSystem {
        // Draw stored windows
           for (SimpleWindow w : windows) {
              this.drawWindow(w);
-             System.out.println("sopas!");
         }
     }
 
