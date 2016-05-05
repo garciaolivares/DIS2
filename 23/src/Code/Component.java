@@ -1,34 +1,24 @@
 package Code;
 
-public class Component {
+/* Component Class
+ *  Define Components and its attributes 
+ *  Component: Title Bar and Buttons are/can be used in the window
+ * */
 
-    class Type { 
-        public static final int BUTTON = 1;
-        public static final int TITLEBAR = 2; 
-    } 
+public class Component {
+	  
+    private int sX = 0; //attibute for starting position in x-axis
+    private int sY = 0; //attibute for starting position in y-axis
+    private int eX = 0; //attibute for ending position in x-axis
+    private int eY = 0; //attibute for ending position in y-axis
     
-    SimpleWindow parent; 
-    private int sX = 0; //attibute for position in x-axis
-    private int sY = 0;
-    private int eX = 0; //attribute for window's width
-    private int eY = 0; //attribute for window's height
-    private int type = 0;
-    
+    //constructor
     public Component(){}
 
-    public Component(int x, int y, int w, int h, int type) {
-        this.parent = parent;
-    } 
-    
-
-    public SimpleWindow getParent() {
-        return parent;
-    }
-
-    public void setParent(SimpleWindow parent) {
-        this.parent = parent;
-    }
-
+    /*
+     * Set and get for all attributes and components
+     */
+  //getters and setters for starting x-position
     public int getsX() {
         return sX;
     }
@@ -37,6 +27,7 @@ public class Component {
         this.sX = sX;
     }
 
+  //getters and setters for starting y-position
     public int getsY() {
         return sY;
     }
@@ -45,6 +36,7 @@ public class Component {
         this.sY = sY;
     }
 
+  //getters and setters for ending x-position
     public int geteX() {
         return eX;
     }
@@ -53,6 +45,7 @@ public class Component {
         this.eX = eX;
     }
 
+  //getters and setters for ending y-position
     public int geteY() {
         return eY;
     }
@@ -61,13 +54,4 @@ public class Component {
         this.eY = eY;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    } 
-    
-     
 }
