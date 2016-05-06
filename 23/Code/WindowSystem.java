@@ -1,6 +1,7 @@
 package Code;
-import de.rwth.hci.Graphics.GraphicsEventSystem; 
-import java.util.ArrayList;  
+import java.util.ArrayList;
+
+import de.rwth.hci.Graphics.GraphicsEventSystem;  
 
 /* WindowSystem Class
  * Basic windows task, draw desktop and simple window
@@ -12,8 +13,7 @@ public class WindowSystem extends GraphicsEventSystem {
     double width, height;
     public Palette palette = new Palette(); //object Palette to call personalized colors
     ArrayList<SimpleWindow> windows; //data structure for our collection of Simple Window objects 
-    public int xError = 1; 
-    public int yError = 23;
+    
 
     //initialization 
     public WindowSystem(int i, int j) {
@@ -37,6 +37,7 @@ public class WindowSystem extends GraphicsEventSystem {
        // Draw stored windows
           for (SimpleWindow w : windows) {
              this.drawWindow(w);
+             System.out.println("sopas!");
         }
     }
 

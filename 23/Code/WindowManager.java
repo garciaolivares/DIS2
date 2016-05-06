@@ -1,5 +1,4 @@
-package Code; 
-import java.util.Iterator;
+package Code;
 
 /* WindowManages Class
  * Look and feel window and its components
@@ -130,12 +129,10 @@ public class WindowManager extends WindowSystem {
     private boolean mousePressed = false;
     private boolean mouseDragging = false;
     private SimpleWindow activeWindow = new SimpleWindow();
-    private int xClicked, yClicked = 0;
+    //private int xClicked, yClicked = 0;
 
     @Override
     public void handleMouseDragged(int x, int y) {
-    	y -= yError;
-        x -= xError;
         
         /*
          * If the pointes is inside desktop window, 
@@ -196,8 +193,6 @@ public class WindowManager extends WindowSystem {
 
     @Override
     public void handleMouseClicked(int x, int y) {
-    	y -= yError;
-        x -= xError;
         
         //find active window and repaint if accrodingly
         SimpleWindow key = findWindow(x, y);

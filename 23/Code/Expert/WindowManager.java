@@ -120,7 +120,7 @@ public class WindowManager extends WindowSystem {
     public void drawDock() {
     	//set dock attributes
         dock.setsX(0);
-        dock.setsY((int) this.height - 80);
+        dock.setsY((int) this.height - 40);
         dock.seteX((int) this.width);
         dock.seteY((int) this.height);
         super.setColor(palette.alfaGray());
@@ -130,12 +130,12 @@ public class WindowManager extends WindowSystem {
     //Draw icon
     public void drawIcon(int pos) {
     	//size and separation between icons
-        int sizeIcon = (((int) width - 10 - (2 * xError)) / dock.getIcons().size());
+        int sizeIcon = (((int) width - 12) / dock.getIcons().size());
         sizeIcon = (sizeIcon > 200) ? 200 : sizeIcon;
         
         //set Icon attributes
         dock.getIcons().get(pos).setsX((pos) * sizeIcon + 10);
-        dock.getIcons().get(pos).setsY((int) height - 75);
+        dock.getIcons().get(pos).setsY((int) height - 35);
         dock.getIcons().get(pos).seteX(((pos) * sizeIcon) + sizeIcon);
         dock.getIcons().get(pos).seteY((int) height);
 
@@ -154,9 +154,10 @@ public class WindowManager extends WindowSystem {
         String title = dock.getIcons().get(pos).getParent().getTitle(); //match icon title with window title as well as belonging to it
         title = title.length() < Math.round(sizeIcon / 9) ? title : title.substring(0, Math.round(sizeIcon / 9)) + "...";
 
+        int yDif= ((dock.getIcons().get(pos).geteY() - dock.getIcons().get(pos).getsY())-10);
         super.drawString(title,
                 dock.getIcons().get(pos).getsX() + 10,
-                dock.getIcons().get(pos).getsY() + 26);
+                dock.getIcons().get(pos).getsY() + yDif);
     }
 
     //Fill component with FillRect method from super
@@ -197,9 +198,6 @@ public class WindowManager extends WindowSystem {
 
     @Override
     public void handleMouseDragged(int x, int y) {
-        y -= yError;
-        x -= xError;
-        
         /*
          * If the pointes is inside desktop window, 
          * pressed and dragging inside selected window titlebar
@@ -235,8 +233,6 @@ public class WindowManager extends WindowSystem {
 
     @Override
     public void handleMouseClicked(int x, int y) {
-        y -= yError;
-        x -= xError;
         
       //find active window and repaint if accrodingly
         SimpleWindow key = findWindow(x, y);
