@@ -1,4 +1,4 @@
-package Code;
+
 import java.awt.Color;
 
 /*Palette class 

@@ -1,4 +1,4 @@
-package Code;
+
 
 /* Application Class
  * Creates windows (3 for this assignment)
@@ -15,9 +15,9 @@ public class MyApp {
 		WindowManager wm = new WindowManager(1000, 600);
 
 		//calls method addWindow to our buffer of SimpleWindow objects
-        wm.addWindow(new SimpleWindow(10, 10, 1, 300, 100, "Window1"));
-        wm.addWindow(new SimpleWindow(300, 120, 2, 300, 160, "Window2"));
-        wm.addWindow(new SimpleWindow(400, 300, 3, 420, 220, "Window3"));
+        wm.addWindow(new SimpleWindow(0.08f, 0.07f, 1, 0.2f, 0.2f, "Window1"));
+        wm.addWindow(new SimpleWindow(0.2f, 0.2f , 2, 0.4f, 0.3f, "Window2"));
+        wm.addWindow(new SimpleWindow(0.4f, 0.3f, 3, 0.3f, 0.5f, "Window3"));
 	}
 
 }

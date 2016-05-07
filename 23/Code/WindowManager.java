@@ -1,4 +1,4 @@
-package Code;
+
 
 /* WindowManages Class
  * Look and feel window and its components
@@ -17,10 +17,10 @@ public class WindowManager extends WindowSystem {
     public void drawTitleBar(SimpleWindow window, char status) {
     	
     	//set titlebar attributes starting/ending x,y coordinates
-        window.getTitlebar().setsX(window.getX());
-        window.getTitlebar().setsY(window.getY());
-        window.getTitlebar().seteX(window.getX() + window.getWidth());
-        window.getTitlebar().seteY(window.getY() + 22);
+        window.getTitlebar().setsX(window.getRelativeX());
+        window.getTitlebar().setsY(window.getRelativeY());
+        window.getTitlebar().seteX(window.getRelativeX() + window.getWidth());
+        window.getTitlebar().seteY(window.getRelativeY() + 22);
         
         //check status active/inactive window
         if (status == 'i') {
@@ -64,17 +64,17 @@ public class WindowManager extends WindowSystem {
     // Writes Title String
     public void writeTitle(SimpleWindow window) {
         super.setColor(palette.lightGray());
-        super.drawString(window.getTitle(), window.getX() + 8, window.getY() + 16);
+        super.drawString(window.getTitle(), window.getRelativeX() + 8, window.getRelativeY() + 16);
     }
     
     // Draws Close button
     public void drawCloseButton(SimpleWindow window, char status) {
     	
     	//set button attributes starting/ending x,y coordinates
-        window.getCloseButton().setsX(window.getX() + window.getWidth() - 28);
-        window.getCloseButton().setsY(window.getY() + 2);
-        window.getCloseButton().seteX(window.getX() + window.getWidth() - 2);
-        window.getCloseButton().seteY(window.getY() + 20);
+        window.getCloseButton().setsX(window.getRelativeX() + window.getWidth() - 28);
+        window.getCloseButton().setsY(window.getRelativeY() + 2);
+        window.getCloseButton().seteX(window.getRelativeX() + window.getWidth() - 2);
+        window.getCloseButton().seteY(window.getRelativeY() + 20);
         
       //check status active/inactive window
         if (status == 'a') {
@@ -92,7 +92,7 @@ public class WindowManager extends WindowSystem {
                     window.getCloseButton().geteX(),
                     window.getCloseButton().geteY());
             super.setColor(palette.white());
-            super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
+            super.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16);
 
         } else {
         	//if inactive gray
@@ -109,7 +109,7 @@ public class WindowManager extends WindowSystem {
                     window.getCloseButton().geteX(),
                     window.getCloseButton().geteY());
             super.setColor(palette.white());
-            super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
+            super.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16);
         }
     }
 
@@ -122,38 +122,7 @@ public class WindowManager extends WindowSystem {
         windows.remove(w);
         windows.add(w);
     }
-
-    /*
-     * Set of flags for mouse actions/events as well as active window
-     */
-    private boolean mousePressed = false;
-    private boolean mouseDragging = false;
-    private SimpleWindow activeWindow = new SimpleWindow();
-    //private int xClicked, yClicked = 0;
-
-    @Override
-    public void handleMouseDragged(int x, int y) {
-        
-        /*
-         * If the pointes is inside desktop window, 
-         * pressed and dragging inside selected window titlebar
-         * detect coordinates and move window accordingly
-         */
-        if ((x>=0 && x<width)&&(y>=0 && y<height)){
-	        if (mousePressed && mouseDragging) {
-	            windowSetPosition(x, y, activeWindow);
-	        } else {
-	            SimpleWindow key = findWindow(x, y);
-	            if (windows.contains(key) && isInsideTitleBar(x, y, key)) {
-	                setActiveWindow(key);
-	                activeWindow = key;
-	                mouseDragging = true;
-	                windowSetPosition(x, y, key);
-	            }
-	        }
-        }
-    }
-
+    
     //Checks if pointer is inside Titlebar
     public boolean isInsideTitleBar(int x, int y, SimpleWindow w) {
     	
@@ -174,6 +143,37 @@ public class WindowManager extends WindowSystem {
             return true;
         }
         return false;
+    }
+
+    /*
+     * Set of flags for mouse actions/events as well as active window
+     */
+    private boolean mousePressed = false;
+    private boolean mouseDragging = false;
+    private SimpleWindow activeWindow = new SimpleWindow();
+    
+
+    @Override
+    public void handleMouseDragged(int x, int y) {
+        
+        /*
+         * If the pointes is inside desktop window, 
+         * pressed and dragging inside selected window titlebar
+         * detect coordinates and move window accordingly
+         */
+        if ((x>=0 && x<(desktopWidth-5))&&(y>=0 && y<(desktopHeight-10))){
+	        if (mousePressed && mouseDragging) {
+	            windowSetPosition(x, y, activeWindow);
+	        } else {
+	            SimpleWindow key = findWindow(x, y);
+	            if (windows.contains(key) && isInsideTitleBar(x, y, key)) {
+	                setActiveWindow(key);
+	                activeWindow = key;
+	                mouseDragging = true;
+	                windowSetPosition(x, y, key);
+	            }
+	        }
+        }
     }
 
     @Override
@@ -216,34 +216,36 @@ public class WindowManager extends WindowSystem {
         //iterate through collection of windows
         for (SimpleWindow w : windows) {
         	//compare by attributes and return window
-            if ((w.getX() < x) && (w.getY() < y)
-                    && (w.getX() + w.getWidth() > x)
-                    && (w.getY() + w.getHeight() > y)) {
+            if ((w.getRelativeX() < x) && (w.getRelativeY() < y)
+                    && (w.getRelativeX() + w.getWidth() > x)
+                    && (w.getRelativeY() + w.getHeight() > y)) {
                 window = w;
             }
         }
         return window;
     }
 
-    //Set position of window
+    //Recalculate relative coordinates of position of window after it is dragged
     public void windowSetPosition(int x, int y, SimpleWindow window) {
     	
-    	//Set position in X
-        if (x > this.width) {
-            window.setX((int) this.width - 10);
+    //Set position in X
+        if (x > this.desktopWidth) {
+            window.setAbsoluteX((float)(this.desktopWidth/desktopWidth));
         } else if (x < 0) {
-            window.setX(0);
+            window.setAbsoluteX(0.0f);
         } else {
-            window.setX(x);
+        	float absX= (float)(x/desktopWidth);
+            window.setAbsoluteX(absX);
         }
         
-        //Seto position in Y
-        if (y > this.height) {
-            window.setY((int) this.height - 30);
+        //Set position in Y
+        if (y > this.desktopHeight) {
+            window.setAbsoluteY((float)(this.desktopWidth/desktopWidth));
         } else if (y < 0) {
-            window.setY(0);
+            window.setAbsoluteY(0.0f);
         } else {
-            window.setY(y);
+        	float absY= (float)(y/desktopHeight);
+            window.setAbsoluteY(absY);       
         }
         
         requestRepaint(); //repaint window

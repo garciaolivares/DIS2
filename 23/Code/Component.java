@@ -1,4 +1,4 @@
-package Code;
+
 
 /* Component Class
  *  Define Components and its attributes 
@@ -12,13 +12,12 @@ public class Component {
     private int eX = 0; //attibute for ending position in x-axis
     private int eY = 0; //attibute for ending position in y-axis
     
-    //constructor
+
     public Component(){}
 
     /*
      * Set and get for all attributes and components
      */
-  //getters and setters for starting x-position
     public int getsX() {
         return sX;
     }
@@ -27,7 +26,6 @@ public class Component {
         this.sX = sX;
     }
 
-  //getters and setters for starting y-position
     public int getsY() {
         return sY;
     }
@@ -36,7 +34,6 @@ public class Component {
         this.sY = sY;
     }
 
-  //getters and setters for ending x-position
     public int geteX() {
         return eX;
     }
@@ -45,7 +42,6 @@ public class Component {
         this.eX = eX;
     }
 
-  //getters and setters for ending y-position
     public int geteY() {
         return eY;
     }
