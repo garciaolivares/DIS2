@@ -1,4 +1,4 @@
-package Code.Expert;
+
 
 /* Component Class
  *  Define Components and its attributes 

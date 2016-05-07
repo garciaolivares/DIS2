@@ -1,4 +1,4 @@
-package Code.Expert;
+
 import java.awt.Color;
 
 /*Palette class 

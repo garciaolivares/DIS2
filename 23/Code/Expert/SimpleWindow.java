@@ -1,15 +1,18 @@
-package Code.Expert;
+
 
 /* Simple Window class
  * Collection of Windows and its properties
  * */
 public class SimpleWindow {
-
-    private int locationX = 0; //attibute for position in x-axis
-    private int locationY = 0; //attibute for position in y-axis
-    private int locationZ = 0; //attibute for depth in z-axis
-    private int width = 0; //attribute for window's width
-    private int height = 0; //attribute for window's height
+	private float absoluteX = 0; // absolute coordinates
+	private float absoluteY = 0;
+	private float absoluteW = 0; // absolute size
+	private float absoluteH = 0;
+	private int relativeX = 0; // relative coordinates
+	private int relativeY = 0; 
+	private int locationZ = 0;  
+	private int width = 0; // relative size
+	private int height = 0; 
     private String title = ""; //attribute for window's title
     private boolean visible = true; //flag to set visibility of window
 
@@ -22,94 +25,138 @@ public class SimpleWindow {
      * Set of constructors
      */
     
-    //empty constructor
-    public SimpleWindow() {
-    }
-
-  //constructor with x,y and z coordinates
-    public SimpleWindow(int xPosition, int yPosition, int zDepth) {
-        locationX = xPosition;
-        locationY = yPosition;
-        locationZ = zDepth;
-    }
-
-  //constructor with x,y and z coordinates as well as parameters for width and height
-    public SimpleWindow(int xPosition, int yPosition, int zDepth, int width, int height) {
-        this.locationX = xPosition;
-        this.locationY = yPosition;
+    public SimpleWindow(){}
+    
+    public SimpleWindow(float xPosition, float yPosition, int zDepth) {
+        this.absoluteX = xPosition;
+        this.absoluteY = yPosition;
         this.locationZ = zDepth;
-        this.width = width;
-        this.height = height;
     }
 
-  //constructor with x,y and z coordinates,parameters for width and height and Title name
-    public SimpleWindow(int xPosition, int yPosition, int zDepth, int width, int height, String title) {
-        this.locationX = xPosition;
-        this.locationY = yPosition;
+  
+    public SimpleWindow(float xPosition, float yPosition, int zDepth, float width, float height) {
+        this.absoluteX = xPosition;
+        this.absoluteY = yPosition;
         this.locationZ = zDepth;
-        this.width = width;
-        this.height = height;
+        this.absoluteW = width;
+        this.absoluteH = height;
+    }
+    
+  
+    public SimpleWindow(float xPosition, float yPosition, int zDepth, float width, float height, String title) {
+        this.absoluteX = xPosition;
+        this.absoluteY = yPosition;
+        this.locationZ = zDepth;
+        this.absoluteW = width;
+        this.absoluteH = height;
         this.title = title;
     }
 
     /*
-     * Set and get for all attributes and components
+     * Flag for visibility window
      */
-  //getters and setters for Title name
-    String getTitle() {
-        return this.title;
+    public boolean isVisible() {
+        return visible;
     }
 
-    public void setTitle(String title) {
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
+    /*
+     * Set and get for all attributes and components of the Window
+     */
+    String getTitle(){
+        return this.title;
+    }
+    
+    public void setTitle(String title){
         this.title = title;
     }
 
-    //getters and setters for x position
-    int getX() {
-        return locationX;
-    }
+    public float getAbsoluteX() {
+		return absoluteX;
+	}
 
-    void setX(int x) {
-        this.locationX = x;
-    }
 
-    //getters and setters for y position
-    int getY() {
-        return locationY;
-    }
+	public void setAbsoluteX(float absoluteX) {
+		this.absoluteX = absoluteX;
+	}
 
-    void setY(int y) {
-        this.locationY = y;
-    }
 
-    //getters and setters for z position
-    int getZ() {
+	public float getAbsoluteY() {
+		return absoluteY;
+	}
+
+
+	public void setAbsoluteY(float absoluteY) {
+		this.absoluteY = absoluteY;
+	}
+
+
+	public float getAbsoluteW() {
+		return absoluteW;
+	}
+
+
+	public void setAbsoluteW(float absoluteW) {
+		this.absoluteW = absoluteW;
+	}
+
+
+	public float getAbsoluteH() {
+		return absoluteH;
+	}
+
+
+	public void setAbsoluteH(float absoluteH) {
+		this.absoluteH = absoluteH;
+	}
+
+
+	public int getRelativeX() {
+		return relativeX;
+	}
+
+
+	public void setRelativeX(int relativeX) {
+		this.relativeX = relativeX;
+	}
+
+
+	public int getRelativeY() {
+		return relativeY;
+	}
+
+
+	public void setRelativeY(int relativeY) {
+		this.relativeY = relativeY;
+	}
+
+    public int getZ() {
         return locationZ;
     }
 
-    void setZ(int z) {
+    public void setZ(int z) {
         this.locationZ = z;
     }
 
-    //getters and setters for window's width
-    void setWidth(int width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    int getWidth() {
+    public int getWidth() {
         return this.width;
     }
 
-    //getters and setters for window's height
-    void setHeight(int height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    int getHeight() {
+     public int getHeight() {
         return this.height;
     }
-
-  //getters and setters for Component of Window: Title Bar
+   
     public Component getTitlebar() {
         return titlebar;
     }
@@ -118,7 +165,6 @@ public class SimpleWindow {
         this.titlebar = titlebar;
     }
 
-  //getters and setters for Component of Window: Close Button
     public Component getCloseButton() {
         return closeButton;
     }
@@ -127,7 +173,7 @@ public class SimpleWindow {
         this.closeButton = closeButton;
     }
 
-  //getters and setters for Component of Window: Minimize Button
+  
     public Component getMinimizeButton() {
         return minimizeButton;
     }
@@ -136,17 +182,7 @@ public class SimpleWindow {
         this.minimizeButton = minimizeButton;
     }
 
-    //Call of visible flag
-    public boolean isVisible() {
-        return visible;
-    }
-
-    //Set visibility of window
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
     
-  //getters and setters for Component of Window: Icon
     public Component getIcon() {
         return icon;
     }
@@ -154,5 +190,7 @@ public class SimpleWindow {
     public void setIcon(Component icon) {
         this.icon = icon;
     }
+    
+    
      
 }

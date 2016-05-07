@@ -1,4 +1,4 @@
-package Code.Expert;
+
 
 /* WindowManages Class
  * Look and feel window and its components
@@ -20,10 +20,10 @@ public class WindowManager extends WindowSystem {
     public void drawTitleBar(SimpleWindow window, char status) {
     	
     	//set titlebar attributes starting/ending x,y coordinates
-        window.getTitlebar().setsX(window.getX());
-        window.getTitlebar().setsY(window.getY());
-        window.getTitlebar().seteX(window.getX() + window.getWidth());
-        window.getTitlebar().seteY(window.getY() + 22);
+        window.getTitlebar().setsX(window.getRelativeX());
+        window.getTitlebar().setsY(window.getRelativeY());
+        window.getTitlebar().seteX(window.getRelativeX() + window.getWidth());
+        window.getTitlebar().seteY(window.getRelativeY() + 22);
 
       //check status active/inactive window
         if (status == 'i') {
@@ -54,17 +54,17 @@ public class WindowManager extends WindowSystem {
         String title = window.getTitle();
         title = title.length() < Math.round((window.getWidth()) / 8) ? title : title.substring(0, (int) Math.round((window.getWidth()) / 8)) + "...";
 
-        super.drawString(title, window.getX() + 8, window.getY() + 16);
+        super.drawString(title, window.getRelativeX() + 8, window.getRelativeY() + 16);
     }
 
  // Draws Close button
     public void drawCloseButton(SimpleWindow window, char status) {
     	
     	//set button attributes starting/ending x,y coordinates
-        window.getCloseButton().setsX(window.getX() + window.getWidth() - 28);
-        window.getCloseButton().setsY(window.getY() + 2);
-        window.getCloseButton().seteX(window.getX() + window.getWidth() - 2);
-        window.getCloseButton().seteY(window.getY() + 20);
+        window.getCloseButton().setsX(window.getRelativeX() + window.getWidth() - 28);
+        window.getCloseButton().setsY(window.getRelativeY() + 2);
+        window.getCloseButton().seteX(window.getRelativeX() + window.getWidth() - 2);
+        window.getCloseButton().seteY(window.getRelativeY() + 20);
 
       //check status active/inactive window
         if (status == 'a') {
@@ -74,7 +74,7 @@ public class WindowManager extends WindowSystem {
             super.setColor(palette.white());
 //            drawComponent(window.getCloseButton()); //use attributes/coordinates to draw
 //            super.setColor(palette.white());
-            super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
+            super.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16);
         } else {
         	//if inactive gray
             super.setColor(palette.darkGray());
@@ -82,18 +82,18 @@ public class WindowManager extends WindowSystem {
             super.setColor(palette.black());
             drawComponent(window.getCloseButton()); //use attributes/coordinates to draw
             super.setColor(palette.white());
-            super.drawString("X", window.getX() + window.getWidth() - 18, window.getY() + 16);
+            super.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16);
         }
     }
 
- // Draws Minimize button
+	// Draws Minimize button
     public void drawMinimizeButton(SimpleWindow window, char status) {
     	
     	//set button attributes starting/ending x,y coordinates
-        window.getMinimizeButton().setsX(window.getX() + window.getWidth() - 58);
-        window.getMinimizeButton().setsY(window.getY() + 2);
-        window.getMinimizeButton().seteX(window.getX() + window.getWidth() - 30);
-        window.getMinimizeButton().seteY(window.getY() + 20);
+        window.getMinimizeButton().setsX(window.getRelativeX() + window.getWidth() - 58);
+        window.getMinimizeButton().setsY(window.getRelativeY() + 2);
+        window.getMinimizeButton().seteX(window.getRelativeX() + window.getWidth() - 30);
+        window.getMinimizeButton().seteY(window.getRelativeY() + 20);
 
       //check status active/inactive window
         if (status == 'a') {
@@ -103,7 +103,7 @@ public class WindowManager extends WindowSystem {
 //            super.setColor(palette.black());
 //            drawComponent(window.getMinimizeButton()); //use attributes/coordinates to draw
             super.setColor(palette.white());
-            super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
+            super.drawString("_", window.getRelativeX() + window.getWidth() - 46, window.getRelativeY() + 13);
 
         } else {
         	//if inactive gray
@@ -112,7 +112,7 @@ public class WindowManager extends WindowSystem {
             super.setColor(palette.black());
             drawComponent(window.getMinimizeButton()); //use attributes/coordinates to draw
             super.setColor(palette.white());
-            super.drawString("_", window.getX() + window.getWidth() - 46, window.getY() + 13);
+            super.drawString("_", window.getRelativeX() + window.getWidth() - 46, window.getRelativeY() + 13);
         }
     }
 
@@ -120,9 +120,9 @@ public class WindowManager extends WindowSystem {
     public void drawDock() {
     	//set dock attributes
         dock.setsX(0);
-        dock.setsY((int) this.height - 40);
-        dock.seteX((int) this.width);
-        dock.seteY((int) this.height);
+        dock.setsY((int) this.desktopHeight - 40);
+        dock.seteX((int) this.desktopWidth);
+        dock.seteY((int) this.desktopHeight);
         super.setColor(palette.alfaGray());
         super.fillRect(dock.getsX(), dock.getsY(), dock.geteX(), dock.geteY()); //draw 
     }
@@ -130,14 +130,14 @@ public class WindowManager extends WindowSystem {
     //Draw icon
     public void drawIcon(int pos) {
     	//size and separation between icons
-        int sizeIcon = (((int) width - 12) / dock.getIcons().size());
+        int sizeIcon = (((int) desktopWidth - 12) / dock.getIcons().size());
         sizeIcon = (sizeIcon > 200) ? 200 : sizeIcon;
         
         //set Icon attributes
         dock.getIcons().get(pos).setsX((pos) * sizeIcon + 10);
-        dock.getIcons().get(pos).setsY((int) height - 35);
+        dock.getIcons().get(pos).setsY((int) desktopHeight - 35);
         dock.getIcons().get(pos).seteX(((pos) * sizeIcon) + sizeIcon);
-        dock.getIcons().get(pos).seteY((int) height);
+        dock.getIcons().get(pos).seteY((int) desktopHeight);
 
         super.setColor(palette.gray());
         super.fillRect(dock.getIcons().get(pos).getsX(),
@@ -203,7 +203,7 @@ public class WindowManager extends WindowSystem {
          * pressed and dragging inside selected window titlebar
          * detect coordinates and move window accordingly
          */
-        if ((x>=0 && x<=width)&&(y>=0 && y<=height)){
+        if ((x>=0 && x<(desktopWidth-5))&&(y>=0 && y<(desktopHeight-15))){
 	        if (mousePressed && mouseDragging) {
 	            windowSetPosition(x, y, activeWindow);
 	        } else {
@@ -285,9 +285,9 @@ public class WindowManager extends WindowSystem {
       //iterate through collection of windows
         for (SimpleWindow w : windows) {
         	//compare by attributes and return window
-            if ((w.getX() < x) && (w.getY() < y)
-                    && (w.getX() + w.getWidth() > x)
-                    && (w.getY() + w.getHeight() > y)
+            if ((w.getRelativeX() < x) && (w.getRelativeY() < y)
+                    && (w.getRelativeX() + w.getWidth() > x)
+                    && (w.getRelativeY() + w.getHeight() > y)
             		&& w.isVisible()){
                 window = w;
             }
@@ -299,21 +299,23 @@ public class WindowManager extends WindowSystem {
     public void windowSetPosition(int x, int y, SimpleWindow window) {
     	
     	//Set position in X
-        if (x > this.width) {
-            window.setX((int) this.width - 10);
+        if (x > this.desktopWidth) {
+            window.setAbsoluteX((float)(this.desktopWidth/desktopWidth));
         } else if (x < 0) {
-            window.setX(0);
+            window.setAbsoluteX(0.0f);
         } else {
-            window.setX(x);
+        	float absX= (float)(x/desktopWidth);
+            window.setAbsoluteX(absX);
         }
-
-      //Seto position in Y
-        if (y > (this.height - 90)) {
-            window.setY((int) this.height - 90);
+        
+        //Set position in Y
+        if (y > this.desktopHeight) {
+            window.setAbsoluteY((float)(this.desktopWidth/desktopWidth));
         } else if (y < 0) {
-            window.setY(0);
+            window.setAbsoluteY(0.0f);
         } else {
-            window.setY(y);
+        	float absY= (float)(y/desktopHeight);
+            window.setAbsoluteY(absY);       
         }
         
         requestRepaint(); //repaint window
