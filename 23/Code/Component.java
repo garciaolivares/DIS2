@@ -1,23 +1,29 @@
-
+package Code;
 
 /* Component Class
  *  Define Components and its attributes 
  *  Component: Title Bar and Buttons are/can be used in the window
  * */
-
 public class Component {
 	  
     private int sX = 0; //attibute for starting position in x-axis
     private int sY = 0; //attibute for starting position in y-axis
     private int eX = 0; //attibute for ending position in x-axis
-    private int eY = 0; //attibute for ending position in y-axis
+    private int eY = 0; //attibute for ending position in y-axis 
+    private SimpleWindow parent; //simple window object
     
-
-    public Component(){}
+    //constructors
+    public Component(){
+    }
+    
+    public Component(final SimpleWindow parent){
+        this.parent = parent;
+    }
 
     /*
      * Set and get for all attributes and components
      */
+  //getters and setters for starting x-position
     public int getsX() {
         return sX;
     }
@@ -26,6 +32,7 @@ public class Component {
         this.sX = sX;
     }
 
+  //getters and setters for starting y-position
     public int getsY() {
         return sY;
     }
@@ -34,6 +41,7 @@ public class Component {
         this.sY = sY;
     }
 
+  //getters and setters for ending x-position
     public int geteX() {
         return eX;
     }
@@ -42,6 +50,7 @@ public class Component {
         this.eX = eX;
     }
 
+  //getters and setters for ending y-position
     public int geteY() {
         return eY;
     }
@@ -50,4 +59,13 @@ public class Component {
         this.eY = eY;
     }
 
+    //return parent window (in case of icon)
+    public SimpleWindow getParent() {
+        return parent;
+    }
+
+  //set parent window (in case of icon)
+    public void setParent(SimpleWindow parent) {
+        this.parent = parent;
+    }
 }

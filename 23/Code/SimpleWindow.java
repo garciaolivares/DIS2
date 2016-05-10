@@ -1,24 +1,25 @@
-
+package Code;
 
 /* Simple Window class
  * Collection of Windows and its properties
  * */
-
 public class SimpleWindow {
-
-    private float absoluteX = 0; // absolute coordinates
-    private float absoluteY = 0;
-    private float absoluteW = 0; // absolute size
-    private float absoluteH = 0;
+	private float absoluteX = 0; // absolute coordinates
+	private float absoluteY = 0;
+	private float absoluteW = 0; // absolute size
+	private float absoluteH = 0;
 	private int relativeX = 0; // relative coordinates
-    private int relativeY = 0; 
-    private int locationZ = 0;  
-    private int width = 0; // relative size
-    private int height = 0; 
-    private String title = ""; 
-    
+	private int relativeY = 0; 
+	private int locationZ = 0;  
+	private int width = 0; // relative size
+	private int height = 0; 
+    private String title = ""; //attribute for window's title
+    private boolean visible = true; //flag to set visibility of window
+
     private Component titlebar = new Component(); //titlebar component of the window
-    private Component closeButton = new Component();//close button component of the window
+    private Component closeButton = new Component(); //close button component of the window
+    private Component minimizeButton = new Component(); //minimize button component of the window
+    private Component icon = new Component(); //icon component of the window (when is minimized)
     
     /*
      * Set of constructors
@@ -26,7 +27,6 @@ public class SimpleWindow {
     
     public SimpleWindow(){}
     
-   
     public SimpleWindow(float xPosition, float yPosition, int zDepth) {
         this.absoluteX = xPosition;
         this.absoluteY = yPosition;
@@ -50,6 +50,17 @@ public class SimpleWindow {
         this.absoluteW = width;
         this.absoluteH = height;
         this.title = title;
+    }
+
+    /*
+     * Flag for visibility window
+     */
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
     
     /*
@@ -162,5 +173,24 @@ public class SimpleWindow {
         this.closeButton = closeButton;
     }
 
+  
+    public Component getMinimizeButton() {
+        return minimizeButton;
+    }
 
+    public void setMinimizeButton(Component minimizeButton) {
+        this.minimizeButton = minimizeButton;
+    }
+
+    
+    public Component getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Component icon) {
+        this.icon = icon;
+    }
+    
+    
+     
 }
