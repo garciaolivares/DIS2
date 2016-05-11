@@ -31,10 +31,7 @@ public class WindowSystem extends GraphicsEventSystem {
 
     //Method to add a new Window
     public void addWindow(SimpleWindow window) {
-        convertX(window);
-        convertY(window);
-        convertWidth(window);
-        convertHeight(window);
+        absoluteToRelative(window);
         windows.add(window); //Add SimpleWindow object to our collection
 
         if (wm != null) {
@@ -68,19 +65,20 @@ public class WindowSystem extends GraphicsEventSystem {
 
     @Override
     protected void handlePaint() {
-        //super.setBackground(palette.purple());
+        super.setBackground(palette.purple());
         // Draw stored windows
         for (SimpleWindow w : windows) {
-
             if (w.isVisible()) {
                 this.drawWindow(w);
-                wm.decorateWindow(w);
+                if (wm != null) {
+                    wm.decorateWindow(w);
+                }
                 drawWidgets(w);
             }
         }
-
-        wm.refreshDock();
-
+        if (wm != null) {
+            wm.refreshDock();
+        }
     }
 
     public void drawWidgets(SimpleWindow window) {
@@ -88,52 +86,46 @@ public class WindowSystem extends GraphicsEventSystem {
             if (widget instanceof RATlabel) {
                 drawLabel((RATlabel) widget, window);
             }
-             if (widget instanceof RATbutton) {
+            if (widget instanceof RATbutton) {
                 drawButton((RATbutton) widget, window);
             }
         }
     }
 
     public void drawLabel(RATlabel widget, SimpleWindow parent) {
-        
-        double sx = (widget.getsX()*parent.getWidth())+parent.getRelativeX();
-        double sy = (widget.getsY()*parent.getHeight())+parent.getRelativeY()+20;
-        double ex = (widget.geteX()*parent.getWidth())+parent.getRelativeX();
-        double ey = (widget.geteY()*parent.getHeight())+parent.getRelativeY()+20;
-        
-        super.setColor(widget.getBackgraoundColor());
-        super.fillRect(sx, sy, ex, ey);
-        super.setColor(widget.getBorderColor());
-        super.drawRect(sx, sy, ex, ey);  
+        int sx = (int) (widget.getsX() * parent.getWidth()) + parent.getRelativeX() + 1;
+        int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY() + 23;
+        int ex = (int) (widget.getWidth() * parent.getWidth()) + sx;
+        int ey = (int) (widget.getHeight() * parent.getHeight()) + sy;
+
+       
+
+        setColor(widget.getBackgraoundColor());
+        fillRect(sx, sy, ex, ey);
+        setColor(widget.getBorderColor());
+        drawRect(sx, sy, ex + 1, ey + 1);
         super.setFont(new Font(widget.getFont(), widget.getTypeFace(), widget.getFontSize()));
         super.setColor(widget.getFontColor());
-        super.drawString(widget.getText(),sx,sy); 
-       
+        super.drawString(widget.getText(), sx, sy);
     }
-    
-    public void drawButton(RATbutton widget, SimpleWindow parent) { 
-        
-        double sx = (widget.getsX()*parent.getWidth())+parent.getRelativeX();
-        double sy = (widget.getsY()*parent.getHeight())+parent.getRelativeY()+20;
-        double ex = (widget.geteX()*parent.getWidth())+parent.getRelativeX();
-        double ey = (widget.geteY()*parent.getHeight())+parent.getRelativeY()+20;
-        
-        super.setColor(widget.getBackgraoundColor());
-        super.fillRect(sx, sy, ex, ey);
-        super.setColor(widget.getBorderColor());
-        super.drawRect(sx, sy, ex, ey);  
+
+    public void drawButton(RATbutton widget, SimpleWindow parent) {
+        int sx = (int) (widget.getsX() * parent.getWidth()) + parent.getRelativeX() + 1;
+        int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY() + 23;
+        int ex = (int) (widget.getWidth() * parent.getWidth()) + sx;
+        int ey = (int) (widget.getHeight() * parent.getHeight()) + sy;
+        setColor(widget.getBackgraoundColor());
+        fillRect(sx, sy, ex, ey);
+        setColor(widget.getBorderColor());
+        drawRect(sx, sy, ex + 1, ey + 1);
         super.setFont(new Font(widget.getFont(), widget.getTypeFace(), widget.getFontSize()));
         super.setColor(widget.getFontColor());
-        super.drawString(widget.getText(),sx,sy);  
-       
+        super.drawString(widget.getText(), sx, sy);
     }
 
     //Method to draw a new Window (basic one, no look and feel only plain box)
     public void drawWindow(SimpleWindow window) {
-        convertX(window);
-        convertY(window);
-        convertWidth(window);
-        convertHeight(window);
+        absoluteToRelative(window);
         super.setColor(palette.lightGray());
         super.fillRect(window.getRelativeX(), window.getRelativeY(), window.getRelativeX() + window.getWidth(), window.getRelativeY() + window.getHeight());
         super.setColor(palette.black());
@@ -143,27 +135,11 @@ public class WindowSystem extends GraphicsEventSystem {
     /*
      * Absolute to relative coordinates and size(W,H)
      */
-    public void convertX(SimpleWindow window) {
-        float coord = window.getAbsoluteX();
-        int x = (int) (coord * desktopWidth);
-        window.setRelativeX(x);
+    public void absoluteToRelative(SimpleWindow window) {
+        window.setRelativeX((int) (window.getAbsoluteX() * desktopWidth));
+        window.setRelativeY((int) (window.getAbsoluteY() * desktopHeight));
+        window.setWidth((int) (window.getAbsoluteW() * desktopWidth));
+        window.setHeight((int) (window.getAbsoluteH() * desktopHeight));
     }
 
-    public void convertY(SimpleWindow window) {
-        float coord = window.getAbsoluteY();
-        int y = (int) (coord * desktopHeight);
-        window.setRelativeY(y);
-    }
-
-    public void convertWidth(SimpleWindow window) {
-        float size = window.getAbsoluteW();
-        int w = (int) (size * desktopWidth);
-        window.setWidth(w);
-    }
-
-    public void convertHeight(SimpleWindow window) {
-        float size = window.getAbsoluteH();
-        int h = (int) (size * desktopHeight);
-        window.setHeight(h);
-    }
 }

@@ -1,25 +1,24 @@
-
 package Code;
 
-public abstract class RATwidget{
-    
+public abstract class RATwidget {
+
     private float sX = 0; //attibute for starting position in x-axis
     private float sY = 0; //attibute for starting position in y-axis
-    private float eX = 0; //attibute for ending position in x-axis
-    private float eY = 0; //attibute for ending position in y-axis 
-    
+    private float width = 0;
+    private float height = 0;
+
     //constructors
-    public RATwidget(float sX, float sY, float eX, float eY){
-        this.setsX(sX);
-        this.setsY(sY);
-        this.seteX(eX);
-        this.seteY(eY);
+    public RATwidget(float sX, float sY, float width, float height) {
+        this.sX = sX;
+        this.sY = sY;
+        this.width = width;
+        this.height = height;
     }
 
     /*
      * Set and get for all attributes and components
      */
-  //getters and setters for starting x-position
+    //getters and setters for starting x-position
     public float getsX() {
         return sX;
     }
@@ -28,7 +27,7 @@ public abstract class RATwidget{
         this.sX = sX;
     }
 
-  //getters and setters for starting y-position
+    //getters and setters for starting y-position
     public float getsY() {
         return sY;
     }
@@ -37,23 +36,20 @@ public abstract class RATwidget{
         this.sY = sY;
     }
 
-  //getters and setters for ending x-position
-    public float geteX() {
-        return eX;
+    public float getWidth() {
+        return width;
     }
 
-    public void seteX(float eX) {
-        this.eX = eX;
+    public void setWidth(float width) {
+        this.width = width;
     }
 
-  //getters and setters for ending y-position
-    public float geteY() {
-        return eY;
+    public float getHeight() {
+        return height;
     }
 
-    public void seteY(float eY) {
-        this.eY = eY;
-    }    
-    
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
 }
-

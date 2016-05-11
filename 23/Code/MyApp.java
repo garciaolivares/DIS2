@@ -19,18 +19,19 @@ public class MyApp {
         SimpleWindow calculator = new SimpleWindow(0.3f, 0.2f, 0.2f, 0.4f, "Calculator");
         
         
-        /*RATlabel l = new RATlabel(0.5f, 0.5f, 0.7f, 0.3f, "SOPAS");
-        l.setFontColor(Color.red);
+        RATlabel l = new RATlabel(0.0f, 0.0f, 0.1f, 0.1f, "SOPAS");
+        l.setFontColor(Color.blue);
         l.setFontSize(20);
+        l.setBackgraoundColor(Color.green);
         l.setBorderColor(Color.yellow);
-        */
-         RATbutton b = new RATbutton(0.5f, 0.5f, 0.7f, 0.3f, "SOPAS2");
+        
+        RATlabel b = new RATlabel(0.0f, 0.5f, 0.3f, 0.6f, "SOPAS2");
         b.setFontColor(Color.red);
         b.setFontSize(20);
         b.setBorderColor(Color.yellow);
         b.setBackgraoundColor(Color.darkGray);
         
-        //calculator.add(l);
+        calculator.add(l);
         calculator.add(b);
         
         

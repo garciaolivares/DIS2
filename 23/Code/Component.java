@@ -20,7 +20,7 @@ public class Component {
     public Component(){
     }
     
-    public Component(final SimpleWindow parent){
+    public Component( SimpleWindow parent){
         this.parent = parent;
     }
 
