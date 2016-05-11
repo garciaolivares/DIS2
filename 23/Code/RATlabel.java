@@ -4,27 +4,19 @@ import java.awt.Color;
 
 public class RATlabel extends RATwidget {
 
-    public enum Typeface {
-        PLAIN,
-        BOLD,
-        CURSIVE,
-        ITALIC,
-    }
+   
 
     private Palette palette = new Palette();
-    private Color backgraoundColor = palette.white();
+    private Color backgraoundColor = palette.transparent();
     private Color borderColor = palette.transparent();
     private Color fontColor = palette.black();
     private String font = "Heveltica";
-    private Typeface typeFace = Typeface.PLAIN;
+    private int typeFace = 0;
     private int fontSize = 12;
     private String text = "";
 
-    public RATlabel(int sX, int sY, int eX, int eY, String text) {
-        this.setsX(sX);
-        this.setsY(sY);
-        this.seteX(eX);
-        this.seteY(eY);
+    public RATlabel(float sX, float sY, float eX, float eY, String text) {
+        super(sX, sY, eX, eY);
         this.text = text;
     }
 
@@ -60,11 +52,11 @@ public class RATlabel extends RATwidget {
         this.font = font;
     }
 
-    public Typeface getTypeFace() {
+    public int getTypeFace() {
         return typeFace;
     }
 
-    public void setTypeFace(Typeface typeFace) {
+    public void setTypeFace(int typeFace) {
         this.typeFace = typeFace;
     }
 

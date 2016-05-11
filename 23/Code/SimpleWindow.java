@@ -1,5 +1,7 @@
 package Code;
 
+import java.util.ArrayList;
+
 /* Simple Window class
  * Collection of Windows and its properties
  * */
@@ -15,20 +17,29 @@ public class SimpleWindow {
     private int height = 0;
     private String title = ""; //attribute for window's title
     private boolean visible = true; //flag to set visibility of window
+    private ArrayList<RATwidget> widgets = new ArrayList<RATwidget>();
 
-    private RATwidget titlebar = new RATwidget() {
+    private Component titlebar = new Component() {
     }; //titlebar component of the window
-    private RATwidget closeButton = new RATwidget() {
+    private Component closeButton = new Component() {
     }; //close button component of the window
-    private RATwidget minimizeButton = new RATwidget() {
+    private Component minimizeButton = new Component() {
     }; //minimize button component of the window
-    private RATwidget icon = new RATwidget() {
+    private Component icon = new Component() {
     }; //icon component of the window (when is minimized)
 
     /*
      * Set of constructors
      */
     public SimpleWindow() {
+    }
+
+    public void add(RATwidget widget) {
+        widgets.add(widget);
+    }
+    
+    public ArrayList<RATwidget> getWidgets(){
+        return this.widgets;
     }
 
     public SimpleWindow(float xPosition, float yPosition) {
@@ -137,35 +148,35 @@ public class SimpleWindow {
         return this.height;
     }
 
-    public RATwidget getTitlebar() {
+    public Component getTitlebar() {
         return titlebar;
     }
 
-    public void setTitlebar(RATwidget titlebar) {
+    public void setTitlebar(Component titlebar) {
         this.titlebar = titlebar;
     }
 
-    public RATwidget getCloseButton() {
+    public Component getCloseButton() {
         return closeButton;
     }
 
-    public void setCloseButton(RATwidget closeButton) {
+    public void setCloseButton(Component closeButton) {
         this.closeButton = closeButton;
     }
 
-    public RATwidget getMinimizeButton() {
+    public Component getMinimizeButton() {
         return minimizeButton;
     }
 
-    public void setMinimizeButton(RATwidget minimizeButton) {
+    public void setMinimizeButton(Component minimizeButton) {
         this.minimizeButton = minimizeButton;
     }
 
-    public RATwidget getIcon() {
+    public Component getIcon() {
         return icon;
     }
 
-    public void setIcon(RATwidget icon) {
+    public void setIcon(Component icon) {
         this.icon = icon;
     }
 
