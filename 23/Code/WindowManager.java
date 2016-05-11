@@ -200,7 +200,6 @@ public class WindowManager extends WindowSystem {
 
     @Override
     public void handleMouseDragged(int x, int y) {
-    	 
         /*
          * If the pointes is inside desktop window, 
          * pressed and dragging inside selected window titlebar
@@ -208,14 +207,12 @@ public class WindowManager extends WindowSystem {
          */
     	
         if ((x>=0 && x<(desktopWidth-5))&&(y>=0 && y<(desktopHeight-15))){
-        	currentX = x;
-            currentY= y;
 	        if (mousePressed && mouseDragging) {
-	            windowSetPosition(x, y, activeWindow);
-	            System.out.println("Standard " + x + "Y" + y);
-	            System.out.println("Viejas " + oldX  + "Y" + oldY);
-	            System.out.println("Nuevas " + currentX  + "Y" + currentY);
-	        } else {
+	        	currentX = x;
+                currentY= y;
+	            windowSetPosition(x, y, activeWindow); 
+	        } 
+	        else {
 	            SimpleWindow key = findWindow(x, y);
 	            if (windows.contains(key) && isInsideComponent(x, y, key.getTitlebar())) {
 	                setActiveWindow(key);
@@ -227,6 +224,7 @@ public class WindowManager extends WindowSystem {
 	        oldX = x;
 	        oldY = y;
         }
+        
     }
 
     @Override
@@ -316,10 +314,8 @@ public class WindowManager extends WindowSystem {
         } else if (x < 0) {
             window.setAbsoluteX(0.0f);
         } else {
-        	float absX= (float)((x-deltaX)/desktopWidth);
+        	float absX= (float)((window.getRelativeX()-deltaX)/desktopWidth);
             window.setAbsoluteX(absX);
-            System.out.println("DeltaX " + deltaX);
-            System.out.println("Resta " + (x- deltaX));
            
         }
         
@@ -330,7 +326,7 @@ public class WindowManager extends WindowSystem {
             window.setAbsoluteY(0.0f);
         } else {
         	
-        	float absY= (float)((y-deltaY)/desktopHeight);
+        	float absY= (float)((window.getRelativeY()-deltaY)/desktopHeight);
             window.setAbsoluteY(absY); 
             
         }
