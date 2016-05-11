@@ -19,6 +19,7 @@ public class Palette {
     private Color lightBlue = new Color(0,128,255);
     private Color lightGray = new Color(242,242,243);
     private Color darkGray = new Color(112,112,112);
+    private Color trasparent = new Color(255,255,255,255);
     
   //Methods to call the value of a color from the other classes
     private Color purple = new Color(80,70,125);
@@ -32,6 +33,7 @@ public class Palette {
     public Color lightPurple(){  return lightPurple; }
     public Color salmon(){  return salmon; }
     public Color alfaGray() {return alfaGray;}
+    public Color transparent(){return trasparent;}
     
     
     public Color black(){  return black; }

@@ -1,11 +1,8 @@
+
 package Code;
 
-/* Component Class
- *  Define Components and its attributes 
- *  Component: Title Bar and Buttons are/can be used in the window
- * */
-public class Component {
-	  
+public abstract class RATwidget{
+    
     private int sX = 0; //attibute for starting position in x-axis
     private int sY = 0; //attibute for starting position in y-axis
     private int eX = 0; //attibute for ending position in x-axis
@@ -13,10 +10,10 @@ public class Component {
     private SimpleWindow parent; //simple window object
     
     //constructors
-    public Component(){
+    public RATwidget(){
     }
     
-    public Component(final SimpleWindow parent){
+    public RATwidget(final SimpleWindow parent){
         this.parent = parent;
     }
 
@@ -68,4 +65,8 @@ public class Component {
     public void setParent(SimpleWindow parent) {
         this.parent = parent;
     }
+    
+    
+    
 }
+

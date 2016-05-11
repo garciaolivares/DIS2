@@ -5,11 +5,11 @@ import java.util.ArrayList;
  *  Define the Dock and its attributes 
  *  Component: Icon (when window is minimized)
  * */
-public class Dock extends Component {
+public class Dock extends RATwidget {
 
     private int width = 0; //attibute for width 
     private int height = 0; //attibute for height
-    private ArrayList<Component> currentIcons = new ArrayList<Component>(); //arraylist of icons
+    private ArrayList<RATwidget> currentIcons = new ArrayList<RATwidget>(); //arraylist of icons
 
     /*
      * Set and get for all attributes and components
@@ -35,16 +35,16 @@ public class Dock extends Component {
     /*
      * Methods to manipulate icons
      */
-    public void addIcon(Component c) {
+    public void addIcon(RATwidget c) {
         this.currentIcons.add(c);
     }
 
-    public void removeIcon(Component c) {
+    public void removeIcon(RATwidget c) {
         this.currentIcons.remove(c);
     }
 
     //return specific icon
-    public ArrayList<Component> getIcons() {
+    public ArrayList<RATwidget> getIcons() {
         return this.currentIcons;
     }
 }
