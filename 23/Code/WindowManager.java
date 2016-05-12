@@ -1,6 +1,4 @@
-package Code;
-
-import java.util.ArrayList;
+package Code; 
 
 /* WindowManages Class
  * Look and feel window and its components
@@ -10,15 +8,13 @@ import java.util.ArrayList;
 public class WindowManager {
 
     Dock dock = new Dock();// Call to create dock
+    int titleBarSize = 24;
 
     public final WindowSystem ws;
     public Palette palette = new Palette(); //object Palette to call personalized colors
 
     public WindowManager(WindowSystem ws) {
-        this.ws = ws;
-        //super(i, j);
-        //super.setBackground(palette.purple());
-
+        this.ws = ws; 
     }
 
     public void windowCreated(final SimpleWindow window) {
@@ -26,8 +22,7 @@ public class WindowManager {
     }
 
     //draw titlebar
-    public void drawTitleBar(SimpleWindow window, char status) {
-
+    public void drawTitleBar(SimpleWindow window, char status) {  
         //set titlebar attributes starting/ending x,y coordinates
         window.getTitlebar().setsX(window.getRelativeX());
         window.getTitlebar().setsY(window.getRelativeY());
@@ -190,8 +185,8 @@ public class WindowManager {
     // Set active windows
     public void setActiveWindow(SimpleWindow w) {
         /*
-    	 * Remove object simpleWindow and re-add it to the list
-    	 * becomes topmost object and the one in front
+         * Remove object simpleWindow and re-add it to the list
+         * becomes topmost object and the one in front
          */
         w.setVisible(true);
         ws.windows.remove(w);
@@ -208,7 +203,8 @@ public class WindowManager {
     private int currentX, currentY;
 
     public void handleMouseDragged(int x, int y) {
-    
+        x -= 3;
+        y -= 33;
         /*
          * If the pointes is inside desktop window, 
          * pressed and dragging inside selected window titlebar
@@ -244,7 +240,9 @@ public class WindowManager {
         activeWindow = new SimpleWindow();
     }
 
-    public void handleMouseClicked(int x, int y) { 
+    public void handleMouseClicked(int x, int y) {
+        x -= 3;
+        y -= 33;
 
         currentX = x;
         currentY = y;
