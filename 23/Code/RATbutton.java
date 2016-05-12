@@ -1,7 +1,7 @@
 
 package Code;
 
-public class RATbutton extends RATlabel implements RATmouseListener{
+public abstract class RATbutton extends RATlabel implements RATmouseListener{
 
     public RATbutton(float sX, float sY, float eX, float eY, String text) {
         super(sX, sY, eX, eY, text);
@@ -10,8 +10,6 @@ public class RATbutton extends RATlabel implements RATmouseListener{
     }
 
     @Override
-    public void mouseClicked(int x, int y) {
-         
-    }
+    public abstract void performance();
     
 }

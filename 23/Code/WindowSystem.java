@@ -62,6 +62,46 @@ public class WindowSystem extends GraphicsEventSystem {
         if (wm != null) {
             wm.handleMouseClicked(x, y);
         }
+
+        SimpleWindow activeWindow = findWindow(x, y);
+        if (windows.contains(activeWindow)) {
+            RATbutton widget = (RATbutton) getClickedWidget(x, y, activeWindow);
+            if (widget != null) {
+                widget.performance();
+                requestRepaint();
+            }
+        }
+    }
+
+    public RATwidget getClickedWidget(int x, int y, SimpleWindow parent) {
+        for (RATwidget widget : parent.getWidgets()) {
+            if (widget instanceof RATbutton) {
+                int sX = (int) ((widget.getsX() * parent.getWidth()) + parent.getRelativeX());
+                int eX = (int) ((widget.getsX() * parent.getWidth() + widget.getWidth() * parent.getWidth()) + parent.getRelativeX());
+                int sY = (int) ((widget.getsY() * parent.getHeight()) + parent.getRelativeY()+ (widget.getHeight()*parent.getHeight())/2);
+                int eY = (int) ((widget.getsY() * parent.getHeight() + widget.getHeight() * parent.getHeight()) + parent.getRelativeY()+ (widget.getHeight()*parent.getHeight())/2);
+                if (x > sX && x < eX && y > sY && y < eY) {
+                    return widget;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public SimpleWindow findWindow(int x, int y) {
+        SimpleWindow window = new SimpleWindow();
+        //iterate through collection of windows
+        for (SimpleWindow w : windows) {
+            //compare by attributes and return window
+            if ((w.getRelativeX() < x) && (w.getRelativeY() - (wm.titleBarSize) < y)
+                    && (w.getRelativeX() + w.getWidth() > x)
+                    && (w.getRelativeY() + w.getHeight() > y)
+                    && w.isVisible()) {
+                window = w;
+            }
+        }
+        return window;
     }
 
     @Override
@@ -95,25 +135,22 @@ public class WindowSystem extends GraphicsEventSystem {
 
     public void drawWidget(RATlabel widget, SimpleWindow parent) {
         int sx = (int) (widget.getsX() * parent.getWidth()) + parent.getRelativeX();
-        int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY() + wm.titleBarSize-2;
+        int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY();
         int ex = (int) (widget.getWidth() * parent.getWidth()) + sx;
-        int ey = (int) (widget.getHeight() * parent.getHeight()+wm.titleBarSize-2) + sy;
-        int textPosition = sy +((int)(widget.getHeight() * parent.getHeight())/2)+(widget.getFontSize()/2)-2;
+        int ey = (int) (widget.getHeight() * parent.getHeight()) + sy;
+        int textPosition = sy + ((int) (widget.getHeight() * parent.getHeight()) / 2) + (widget.getFontSize() / 2) - 2;
+        int textAlign = (int) (widget.getFontSize() / 2 + (widget.getWidth()));
         //Compare wheter if the widget coordinetes are out of windows range
-        //ex = ex > parent.getRelativeX()+parent.getWidth()? (int) parent.getRelativeX()+parent.getWidth() : (ex <= parent.getRelativeX() ? (int) parent.getRelativeX() : ex);
-        //ey = ey > parent.getRelativeY()+parent.getHeight()? (int) parent.getRelativeY()+parent.getHeight()-2 : (ey < parent.getRelativeY()? (int)parent.getRelativeY(): ey);
+        ex = ex > parent.getRelativeX() + parent.getWidth() ? (int) parent.getRelativeX() + parent.getWidth() : (ex <= parent.getRelativeX() ? (int) parent.getRelativeX() : ex);
+        ey = ey > parent.getRelativeY() + parent.getHeight() ? (int) parent.getRelativeY() + parent.getHeight() - 2 : (ey < parent.getRelativeY() ? (int) parent.getRelativeY() : ey);
         super.setColor(widget.getBackgraoundColor());
         super.fillRect(sx, sy, ex, ey);
         super.setColor(widget.getBorderColor());
         super.drawRect(sx, sy, ex, ey);
         super.setFont(new Font(widget.getFont(), widget.getTypeFace(), widget.getFontSize()));
         super.setColor(widget.getFontColor());
-        super.drawString(widget.getText(), sx, textPosition);
+        super.drawString(widget.getText(), sx + textAlign, textPosition);
     }
-    
-    
-
-
 
     //Method to draw a new Window (basic one, no look and feel only plain box)
     public void drawWindow(SimpleWindow window) {

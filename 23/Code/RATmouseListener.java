@@ -1,6 +1,5 @@
-
 package Code;
 
-public interface RATmouseListener {
-    public void mouseClicked(int x, int y);
+public abstract interface RATmouseListener {
+    public abstract void performance();
 }

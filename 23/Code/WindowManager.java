@@ -25,9 +25,9 @@ public class WindowManager {
     public void drawTitleBar(SimpleWindow window, char status) {  
         //set titlebar attributes starting/ending x,y coordinates
         window.getTitlebar().setsX(window.getRelativeX());
-        window.getTitlebar().setsY(window.getRelativeY());
+        window.getTitlebar().setsY(window.getRelativeY()-(titleBarSize-2));
         window.getTitlebar().seteX(window.getRelativeX() + window.getWidth());
-        window.getTitlebar().seteY(window.getRelativeY() + 22);
+        window.getTitlebar().seteY(window.getRelativeY());
 
         //check status active/inactive window
         if (status == 'i') {
@@ -43,9 +43,7 @@ public class WindowManager {
         } else if (status == 'a') {
             //if active colors
             ws.setColor(palette.darkPurple());
-            fillComponent(window.getTitlebar()); //use attributes/coordinates to fill
-//            super.setColor(palette.black());
-//            drawComponent(window.getTitlebar()); //use attributes/coordinates to draw
+            fillComponent(window.getTitlebar()); //use attributes/coordinates to fill  
             this.drawCloseButton(window, 'a');
             this.drawMinimizeButton(window, 'a'); //draw close button
             this.writeTitle(window); //write title string
@@ -58,7 +56,7 @@ public class WindowManager {
         String title = window.getTitle();
         title = title.length() < Math.round((window.getWidth()) / 8) ? title : title.substring(0, (int) Math.round((window.getWidth()) / 8)) + "...";
 
-        ws.drawString(title, window.getRelativeX() + 8, window.getRelativeY() + 16);
+        ws.drawString(title, window.getRelativeX() + 8, window.getRelativeY() + 16 - (titleBarSize-2));
     }
 
     // Draws Close button
@@ -66,9 +64,9 @@ public class WindowManager {
 
         //set button attributes starting/ending x,y coordinates
         window.getCloseButton().setsX(window.getRelativeX() + window.getWidth() - 28);
-        window.getCloseButton().setsY(window.getRelativeY() + 2);
+        window.getCloseButton().setsY(window.getRelativeY() + 2 -(titleBarSize-2));
         window.getCloseButton().seteX(window.getRelativeX() + window.getWidth() - 2);
-        window.getCloseButton().seteY(window.getRelativeY() + 20);
+        window.getCloseButton().seteY(window.getRelativeY() );
 
         //check status active/inactive window
         if (status == 'a') {
@@ -78,7 +76,7 @@ public class WindowManager {
             ws.setColor(palette.white());
 //            drawComponent(window.getCloseButton()); //use attributes/coordinates to draw
 //            super.setColor(palette.white());
-            ws.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16);
+            ws.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16 -(titleBarSize-2));
         } else {
             //if inactive gray
             ws.setColor(palette.darkGray());
@@ -86,7 +84,7 @@ public class WindowManager {
             ws.setColor(palette.black());
             drawComponent(window.getCloseButton()); //use attributes/coordinates to draw
             ws.setColor(palette.white());
-            ws.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16);
+            ws.drawString("X", window.getRelativeX() + window.getWidth() - 18, window.getRelativeY() + 16 -(titleBarSize-2));
         }
     }
 
@@ -95,9 +93,9 @@ public class WindowManager {
 
         //set button attributes starting/ending x,y coordinates
         window.getMinimizeButton().setsX(window.getRelativeX() + window.getWidth() - 58);
-        window.getMinimizeButton().setsY(window.getRelativeY() + 2);
+        window.getMinimizeButton().setsY(window.getRelativeY() + 2 -(titleBarSize-2));
         window.getMinimizeButton().seteX(window.getRelativeX() + window.getWidth() - 30);
-        window.getMinimizeButton().seteY(window.getRelativeY() + 20);
+        window.getMinimizeButton().seteY(window.getRelativeY() );
 
         //check status active/inactive window
         if (status == 'a') {
@@ -107,7 +105,7 @@ public class WindowManager {
 //            super.setColor(palette.black());
 //            drawComponent(window.getMinimizeButton()); //use attributes/coordinates to draw
             ws.setColor(palette.white());
-            ws.drawString("_", window.getRelativeX() + window.getWidth() - 46, window.getRelativeY() + 13);
+            ws.drawString("_", window.getRelativeX() + window.getWidth() - 46, window.getRelativeY() + 13 -(titleBarSize-2));
 
         } else {
             //if inactive gray
@@ -116,7 +114,7 @@ public class WindowManager {
             ws.setColor(palette.black());
             drawComponent(window.getMinimizeButton()); //use attributes/coordinates to draw
             ws.setColor(palette.white());
-            ws.drawString("_", window.getRelativeX() + window.getWidth() - 46, window.getRelativeY() + 13);
+            ws.drawString("_", window.getRelativeX() + window.getWidth() - 46, window.getRelativeY() + 13 -(titleBarSize-2));
         }
     }
 
@@ -185,8 +183,8 @@ public class WindowManager {
     // Set active windows
     public void setActiveWindow(SimpleWindow w) {
         /*
-         * Remove object simpleWindow and re-add it to the list
-         * becomes topmost object and the one in front
+    	 * Remove object simpleWindow and re-add it to the list
+    	 * becomes topmost object and the one in front
          */
         w.setVisible(true);
         ws.windows.remove(w);
@@ -285,7 +283,7 @@ public class WindowManager {
     public boolean isInsideComponent(int x, int y, Component comp) {
         //compares position by coordinates
         if ((x > comp.getsX() && x < comp.geteX())
-                && (y > comp.getsY() && y < comp.geteY())) {
+                && (y > comp.getsY()-(titleBarSize) && y < comp.geteY())) {
             return true;
         }
         return false;
@@ -298,7 +296,7 @@ public class WindowManager {
         //iterate through collection of windows
         for (SimpleWindow w : ws.windows) {
             //compare by attributes and return window
-            if ((w.getRelativeX() < x) && (w.getRelativeY() < y)
+            if ((w.getRelativeX() < x) && (w.getRelativeY()-(titleBarSize) < y)
                     && (w.getRelativeX() + w.getWidth() > x)
                     && (w.getRelativeY() + w.getHeight() > y)
                     && w.isVisible()) {
@@ -312,8 +310,7 @@ public class WindowManager {
     public void windowSetPosition(int x, int y, SimpleWindow window) {
         int deltaX = oldX - currentX;
         int deltaY = oldY - currentY;
-
-        System.out.println("deltay " + deltaY);
+ 
         //Set position in X
         if (x > ws.desktopWidth) {
             window.setAbsoluteX(1.0f);

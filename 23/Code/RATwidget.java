@@ -7,6 +7,11 @@ public abstract class RATwidget {
     private float width = 0;
     private float height = 0;
 
+    @Override
+    public String toString() {
+        return "RATwidget{" + "sX=" + sX + ", sY=" + sY + ", width=" + width + ", height=" + height + '}';
+    }
+
     //constructors
     public RATwidget(float sX, float sY, float width, float height) {
         this.sX = sX;
