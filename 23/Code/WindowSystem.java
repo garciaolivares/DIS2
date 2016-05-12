@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.rwth.hci.Graphics.GraphicsEventSystem;
 import java.awt.Font;
+import java.awt.Rectangle;
 
 /* WindowSystem Class
  * Basic windows task, draw desktop and simple window
@@ -84,44 +85,35 @@ public class WindowSystem extends GraphicsEventSystem {
     public void drawWidgets(SimpleWindow window) {
         for (RATwidget widget : window.getWidgets()) {
             if (widget instanceof RATlabel) {
-                drawLabel((RATlabel) widget, window);
+                drawWidget((RATlabel) widget, window);
             }
             if (widget instanceof RATbutton) {
-                drawButton((RATbutton) widget, window);
+                drawWidget((RATbutton) widget, window);
             }
         }
     }
 
-    public void drawLabel(RATlabel widget, SimpleWindow parent) {
-        int sx = (int) (widget.getsX() * parent.getWidth()) + parent.getRelativeX() + 1;
-        int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY() + 23;
+    public void drawWidget(RATlabel widget, SimpleWindow parent) {
+        int sx = (int) (widget.getsX() * parent.getWidth()) + parent.getRelativeX();
+        int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY() + wm.titleBarSize-2;
         int ex = (int) (widget.getWidth() * parent.getWidth()) + sx;
-        int ey = (int) (widget.getHeight() * parent.getHeight()) + sy;
-
-       
-
-        setColor(widget.getBackgraoundColor());
-        fillRect(sx, sy, ex, ey);
-        setColor(widget.getBorderColor());
-        drawRect(sx, sy, ex + 1, ey + 1);
+        int ey = (int) (widget.getHeight() * parent.getHeight()+wm.titleBarSize-2) + sy;
+        int textPosition = sy +((int)(widget.getHeight() * parent.getHeight())/2)+(widget.getFontSize()/2)-2;
+        //Compare wheter if the widget coordinetes are out of windows range
+        //ex = ex > parent.getRelativeX()+parent.getWidth()? (int) parent.getRelativeX()+parent.getWidth() : (ex <= parent.getRelativeX() ? (int) parent.getRelativeX() : ex);
+        //ey = ey > parent.getRelativeY()+parent.getHeight()? (int) parent.getRelativeY()+parent.getHeight()-2 : (ey < parent.getRelativeY()? (int)parent.getRelativeY(): ey);
+        super.setColor(widget.getBackgraoundColor());
+        super.fillRect(sx, sy, ex, ey);
+        super.setColor(widget.getBorderColor());
+        super.drawRect(sx, sy, ex, ey);
         super.setFont(new Font(widget.getFont(), widget.getTypeFace(), widget.getFontSize()));
         super.setColor(widget.getFontColor());
-        super.drawString(widget.getText(), sx, sy);
+        super.drawString(widget.getText(), sx, textPosition);
     }
+    
+    
 
-    public void drawButton(RATbutton widget, SimpleWindow parent) {
-        int sx = (int) (widget.getsX() * parent.getWidth()) + parent.getRelativeX() + 1;
-        int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY() + 23;
-        int ex = (int) (widget.getWidth() * parent.getWidth()) + sx;
-        int ey = (int) (widget.getHeight() * parent.getHeight()) + sy;
-        setColor(widget.getBackgraoundColor());
-        fillRect(sx, sy, ex, ey);
-        setColor(widget.getBorderColor());
-        drawRect(sx, sy, ex + 1, ey + 1);
-        super.setFont(new Font(widget.getFont(), widget.getTypeFace(), widget.getFontSize()));
-        super.setColor(widget.getFontColor());
-        super.drawString(widget.getText(), sx, sy);
-    }
+
 
     //Method to draw a new Window (basic one, no look and feel only plain box)
     public void drawWindow(SimpleWindow window) {
