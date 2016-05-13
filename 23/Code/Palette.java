@@ -16,7 +16,7 @@ public class Palette {
     private Color lightBlue = new Color(0,128,255);
     private Color lightGray = new Color(242,242,243);
     private Color darkGray = new Color(112,112,112);
-    private Color trasparent = new Color(255,255,255,255);
+    private Color trasparent = new Color(255,255,255,0);
     private Color orange = new Color(196,68,80);
     
   //Methods to call the value of a color from the other classes

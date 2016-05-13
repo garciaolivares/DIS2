@@ -62,6 +62,6 @@ public class HelloWorldGraphical extends SimpleWindow {
         int width = 1080;
         int height = 680;
         WindowSystem ws = new WindowSystem(width, height); 
-        ws.addWindow(new HelloWorldGraphical(0.25f, 0.25f, 0.5f, 0.5f, "Calculator")); 
+        ws.addWindow(new HelloWorldGraphical(0.25f, 0.25f, 0.5f, 0.5f, "Hello World Graphical")); 
     }
 }
