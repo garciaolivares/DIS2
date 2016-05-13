@@ -1,11 +1,14 @@
 package Code;
 
+import Code.Calculator.Operator;
+
 /* Application Class
  * Creates windows 
  * */
 public class MyApp {
 
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
 
         /*create object WindowManager that extends 
 		 * WindowSystem that extends GraphicsEventSystem
@@ -20,7 +23,7 @@ public class MyApp {
 
         float calHeight = 0.5f;
         float calWidth = 0.2f;
-
+        
         WindowSystem ws = new WindowSystem(width, height);
 
         //calls method addWindow to our buffer of SimpleWindow objects
@@ -63,11 +66,13 @@ public class MyApp {
         RATbutton _slash = new RATbutton(digitWidth * 3, digitHeight, digitWidth, digitHeight, "/") {
             @Override
             public void performance() {
-                
-                _display.setText(cal.Division());
+            	cal.displayValue = Double.parseDouble(_display.getText());
+            	cal.input = "";
+            	cal.operatorButtonPressed(Operator.DIVIDE);
+                _display.setText(cal.getResult());
             }
         };
-        _slash.setBackgraoundColor(palette.orange());
+        _slash.setBackgraoundColor(palette.pink());
 
         RATbutton _4 = new RATbutton(0.0f, digitHeight * 2, digitWidth, digitHeight, "4") {
             @Override
@@ -99,11 +104,13 @@ public class MyApp {
         RATbutton _star = new RATbutton(digitWidth * 3, digitHeight * 2, digitWidth, digitHeight, "*") {
             @Override
             public void performance() {
-                
-                _display.setText(cal.Multiplication());
+            	cal.displayValue = Double.parseDouble(_display.getText());
+            	cal.input = "";
+            	cal.operatorButtonPressed(Operator.MULTIPLY);
+                _display.setText(cal.getResult());
             }
         };
-        _star.setBackgraoundColor(palette.orange());
+        _star.setBackgraoundColor(palette.pink());
 
         RATbutton _1 = new RATbutton(0.0f, digitHeight * 3, digitWidth, digitHeight, "1") {
             @Override
@@ -135,10 +142,13 @@ public class MyApp {
         RATbutton _minus = new RATbutton(digitWidth * 3, digitHeight * 3, digitWidth, digitHeight, "-") {
             @Override
             public void performance() { 
-                _display.setText(cal.Subtraction());
+            	cal.displayValue = Double.parseDouble(_display.getText());
+            	cal.input = "";
+            	cal.operatorButtonPressed(Operator.MINUS);
+                _display.setText(cal.getResult());
             }
         };
-        _minus.setBackgraoundColor(palette.orange());
+        _minus.setBackgraoundColor(palette.pink());
 
         RATbutton _0 = new RATbutton(0.0f, digitHeight * 4, digitWidth, digitHeight, "0") {
             @Override
@@ -157,21 +167,30 @@ public class MyApp {
             }
         };
         _dot.setBackgraoundColor(palette.lightGray());
+        
         RATbutton _equal = new RATbutton(digitWidth * 2, digitHeight * 4, digitWidth, digitHeight, "=") {
             @Override
             public void performance() { 
-                _display.setText(cal.result());
+            	cal.displayValue = Double.parseDouble(_display.getText());
+            	cal.input = "";
+                cal.operatorButtonPressed(Operator.EQUALS);
+                _display.setText(cal.getResult());
             }
         };
-        _equal.setBackgraoundColor(palette.orange());
+        _equal.setBackgraoundColor(palette.pink());
+        
         RATbutton _plus = new RATbutton(digitWidth * 3, digitHeight * 4, digitWidth, digitHeight, "+") {
             @Override
             public void performance() {  
-                _display.setText(cal.Add());
+            	cal.displayValue = Double.parseDouble(_display.getText());
+            	cal.input = "";
+            	cal.operatorButtonPressed(Operator.PLUS);
+                _display.setText(cal.getResult());
             }
         };
-        _plus.setBackgraoundColor(palette.orange());
+        _plus.setBackgraoundColor(palette.pink());
 
+        
         calculator.add(_display);
 
         calculator.add(_7);

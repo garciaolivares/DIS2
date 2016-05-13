@@ -21,6 +21,7 @@ public class WindowSystem extends GraphicsEventSystem {
     public WindowSystem(int i, int j) {
         // call parent class to draw our "desktop" with size ixj 
         super(i, j);
+        super.setBackground(palette.purple());
         // define width and height of our desktop with values i and j
         desktopWidth = i;
         desktopHeight = j;
@@ -78,8 +79,8 @@ public class WindowSystem extends GraphicsEventSystem {
             if (widget instanceof RATbutton) {
                 int sX = (int) ((widget.getsX() * parent.getWidth()) + parent.getRelativeX());
                 int eX = (int) ((widget.getsX() * parent.getWidth() + widget.getWidth() * parent.getWidth()) + parent.getRelativeX());
-                int sY = (int) ((widget.getsY() * parent.getHeight()) + parent.getRelativeY()+ (widget.getHeight()*parent.getHeight())/2);
-                int eY = (int) ((widget.getsY() * parent.getHeight() + widget.getHeight() * parent.getHeight()) + parent.getRelativeY()+ (widget.getHeight()*parent.getHeight())/2);
+                int sY = (int) ((widget.getsY() * parent.getHeight()) + parent.getRelativeY());
+                int eY = (int) ((widget.getsY() * parent.getHeight() + widget.getHeight() * parent.getHeight()) + parent.getRelativeY());
                 if (x > sX && x < eX && y > sY && y < eY) {
                     return widget;
                 }
