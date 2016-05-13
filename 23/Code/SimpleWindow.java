@@ -18,6 +18,7 @@ public class SimpleWindow {
     private String title = ""; //attribute for window's title
     private boolean visible = true; //flag to set visibility of window
     private ArrayList<RATwidget> widgets = new ArrayList<RATwidget>();
+    private WindowSystem ws;
 
     private Component titlebar = new Component() {
     }; //titlebar component of the window
@@ -37,8 +38,8 @@ public class SimpleWindow {
     public void add(RATwidget widget) {
         widgets.add(widget);
     }
-    
-    public ArrayList<RATwidget> getWidgets(){
+
+    public ArrayList<RATwidget> getWidgets() {
         return this.widgets;
     }
 
@@ -178,6 +179,14 @@ public class SimpleWindow {
 
     public void setIcon(Component icon) {
         this.icon = icon;
+    }
+
+    public WindowSystem getWS() {
+        return ws;
+    }
+
+    public void setWS(WindowSystem ws) {
+        this.ws = ws;
     }
 
 }

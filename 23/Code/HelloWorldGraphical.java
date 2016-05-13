@@ -42,7 +42,7 @@ public class HelloWorldGraphical extends SimpleWindow {
         close = new RATbutton(0.69f, 0.84f, 0.3f, 0.15f, "CLOSE") {
             @Override
             public void performance() {
-                System.exit(0);
+                closeWindow();
             }
         };
 
@@ -58,10 +58,16 @@ public class HelloWorldGraphical extends SimpleWindow {
         this.add(close);
     }
 
+    public void closeWindow() {
+        this.getWS().windows.remove(this);
+    }
+
     public static void main(String[] args) {
         int width = 1080;
         int height = 680;
-        WindowSystem ws = new WindowSystem(width, height); 
-        ws.addWindow(new HelloWorldGraphical(0.25f, 0.25f, 0.5f, 0.5f, "Hello World Graphical")); 
+        WindowSystem ws = new WindowSystem(width, height);
+        HelloWorldGraphical HWG = new HelloWorldGraphical(0.25f, 0.25f, 0.5f, 0.5f, "Hello World Graphical");
+        HWG.setWS(ws);
+        ws.addWindow(HWG);
     }
 }
