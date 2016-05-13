@@ -1,5 +1,9 @@
 package Code;
 
+/* Calculator Class
+ * Implements operation of calculator plus, minus, multiply and divide.
+ * */
+
 public class Calculator {
 
     public String result = "";

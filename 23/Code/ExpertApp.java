@@ -3,9 +3,9 @@ package Code;
 import Code.Calculator.Operator;
 
 /* Application Class
- * Creates windows 
+ * Creates Calculator
  * */
-public class MyApp {
+public class ExpertApp {
 
 
 	public static void main(String[] args) {
