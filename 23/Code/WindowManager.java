@@ -201,8 +201,6 @@ public class WindowManager {
     private int currentX, currentY;
 
     public void handleMouseDragged(int x, int y) {
-        x -= 3;
-        y -= 33;
         /*
          * If the pointes is inside desktop window, 
          * pressed and dragging inside selected window titlebar
@@ -239,9 +237,6 @@ public class WindowManager {
     }
 
     public void handleMouseClicked(int x, int y) {
-        x -= 3;
-        y -= 33;
-
         currentX = x;
         currentY = y;
         //find active window and repaint if accrodingly
