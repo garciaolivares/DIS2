@@ -33,17 +33,17 @@ public class HelloWorldGraphical extends SimpleWindow {
             }
         };
 
-        french = new RATbutton(0.35f, 0.26f, 0.3f, 0.15f, "FRENCH") {
+        french = new RATbutton(0.35f, 0.26f, 0.3f, 0.15f, "FRANCAIS") {
             @Override
             public void performance() {
                 label.setText("Bonjour!");
             }
         };
 
-        german = new RATbutton(0.35f, 0.42f, 0.3f, 0.15f, "GERMAN") {
+        german = new RATbutton(0.35f, 0.42f, 0.3f, 0.15f, "DEUTSCH") {
             @Override
             public void performance() {
-                label.setText("Guten Tag");
+                label.setText("Guten Tag!");
             }
         };
 
