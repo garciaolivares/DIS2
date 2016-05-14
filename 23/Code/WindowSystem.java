@@ -42,8 +42,12 @@ public class WindowSystem extends GraphicsEventSystem {
         }
     }
 
+    /*
+     * Handlers for Mouse Events
+     * implemented to respond to action events in the widgets
+     */
     public void handleMouseDragged(int x, int y) {
-        y -= 33;
+        
         currentX = x;
         currentY = y;
         if (wm != null) {
@@ -54,7 +58,7 @@ public class WindowSystem extends GraphicsEventSystem {
     }
 
     public void handleMousePressed(int x, int y) {
-        y -= 33;
+        
         currentX = x;
         currentY = y;
         oldX = currentX;
@@ -71,7 +75,7 @@ public class WindowSystem extends GraphicsEventSystem {
     }
 
     public void handleMouseClicked(int x, int y) {
-        y -= 33;
+        
         currentX = x;
         currentY = y;
         oldX = currentX;
@@ -79,7 +83,7 @@ public class WindowSystem extends GraphicsEventSystem {
         if (wm != null) {
             wm.handleMouseClicked(x, y);
         }
-
+        //when a widget is clicket it triggers an action
         SimpleWindow activeWindow = findWindow(x, y);
         if (windows.contains(activeWindow)) {
             RATbutton widget = (RATbutton) getClickedWidget(x, y, activeWindow);
@@ -91,6 +95,7 @@ public class WindowSystem extends GraphicsEventSystem {
 
     }
 
+    //this method help us detect which widget was pressed/clicked based on its coordinates
     public RATwidget getClickedWidget(int x, int y, SimpleWindow parent) {
         for (RATwidget widget : parent.getWidgets()) {
             if (widget instanceof RATbutton) {
@@ -139,17 +144,19 @@ public class WindowSystem extends GraphicsEventSystem {
         }
     }
 
+    //draw the widgets on the simple window
     public void drawWidgets(SimpleWindow window) {
         for (RATwidget widget : window.getWidgets()) {
-            if (widget instanceof RATlabel) {
+            if (widget instanceof RATlabel) { //label
                 drawWidget((RATlabel) widget, window);
             }
-            if (widget instanceof RATbutton) {
+            if (widget instanceof RATbutton) { //button
                 drawWidget((RATbutton) widget, window);
             }
         }
     }
-
+    
+  //draw a widget, set attributes, position, size, text, color
     public void drawWidget(RATlabel widget, SimpleWindow parent) {
         int sx = (int) (widget.getsX() * parent.getWidth()) + parent.getRelativeX();
         int sy = (int) (widget.getsY() * parent.getHeight()) + parent.getRelativeY();
@@ -157,7 +164,7 @@ public class WindowSystem extends GraphicsEventSystem {
         int ey = (int) (widget.getHeight() * parent.getHeight()) + sy;
         int textPosition = sy + ((int) (widget.getHeight() * parent.getHeight()) / 2) + (widget.getFontSize() / 2) - 2;
         int textAlign = (int) (widget.getFontSize() / 2 + (widget.getWidth()));
-        //Compare wheter if the widget coordinetes are out of windows range
+        //Compare wheter if the widget coordinates are out of windows range
         ex = ex > parent.getRelativeX() + parent.getWidth() ? (int) parent.getRelativeX() + parent.getWidth() : (ex <= parent.getRelativeX() ? (int) parent.getRelativeX() : ex );
         ey = ey > parent.getRelativeY() + parent.getHeight() ? (int) parent.getRelativeY() + parent.getHeight() : (ey < parent.getRelativeY() ? (int) parent.getRelativeY() : ey);
         super.setColor(widget.getBackgraoundColor());

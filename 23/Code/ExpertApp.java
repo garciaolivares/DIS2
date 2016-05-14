@@ -1,14 +1,16 @@
 package Code;
 
-public class ExpertApp  {
+/* Expert Class
+ * Used for the calculator
+ * */
 
-   
+public class ExpertApp  {
 
     public static void main(String[] args) {
 
-        /*create object WindowManager that extends 
-		 * WindowSystem that extends GraphicsEventSystem
-		 * to create and draw rectangle (desktop)
+        /*create object WindowSystem that extends GraphicsEventSystem
+		 * to create and draw desktop
+		 * create an object calculator window and add it to our desktop via windowSystem
          */
         int width = 1080;
         int height = 680;
@@ -17,9 +19,6 @@ public class ExpertApp  {
         cal.setWS(ws);
         ws.addWindow(cal);
         
-        HelloWorldGraphical HWG = new HelloWorldGraphical(0.25f, 0.25f, 0.5f, 0.5f, "Hello World Graphical");
-        HWG.setWS(ws);
-        ws.addWindow(HWG);
 
     }
 

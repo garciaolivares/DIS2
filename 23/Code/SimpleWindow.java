@@ -17,7 +17,7 @@ public class SimpleWindow {
     private int height = 0;
     private String title = ""; //attribute for window's title
     private boolean visible = true; //flag to set visibility of window
-    private ArrayList<RATwidget> widgets = new ArrayList<RATwidget>();
+    private ArrayList<RATwidget> widgets = new ArrayList<RATwidget>(); // arraylist to store object fo type RATwidget
     private WindowSystem ws;
 
     private Component titlebar = new Component() {
@@ -33,14 +33,6 @@ public class SimpleWindow {
      * Set of constructors
      */
     public SimpleWindow() {
-    }
-
-    public void add(RATwidget widget) {
-        widgets.add(widget);
-    }
-
-    public ArrayList<RATwidget> getWidgets() {
-        return this.widgets;
     }
 
     public SimpleWindow(float xPosition, float yPosition) {
@@ -61,6 +53,17 @@ public class SimpleWindow {
         this.absoluteW = width;
         this.absoluteH = height;
         this.title = title;
+    }
+    
+    /*
+     * Method to add and initialize the list for object of type RATwidget
+     */
+    public void add(RATwidget widget) {
+        widgets.add(widget);
+    }
+
+    public ArrayList<RATwidget> getWidgets() {
+        return this.widgets;
     }
 
     /*

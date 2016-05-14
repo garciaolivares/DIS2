@@ -1,7 +1,12 @@
 package Code;
 
+/* Hello World Graphical Class
+ * Initialize the components
+ * Call for the events
+ * */
 public class HelloWorldGraphical extends SimpleWindow {
 
+	//Components/widgets
     RATlabel label;
     RATbutton english;
     RATbutton french;
@@ -9,11 +14,16 @@ public class HelloWorldGraphical extends SimpleWindow {
     RATbutton close;
     Palette palette;
 
+    //Constructor of the window
     public HelloWorldGraphical(float xPosition, float yPosition, float width, float height, String title) {
         super(xPosition, yPosition, width, height, title);
         init();
     }
 
+    /*
+     * Initialize the components, create the widgets with their attributes, set color, size, text
+     * Have action event called performance
+     */
     public void init() {
         palette = new Palette();
         label = new RATlabel(0.35f, 0.58f, 0.3f, 0.15f, "");
@@ -46,11 +56,13 @@ public class HelloWorldGraphical extends SimpleWindow {
             }
         };
 
+        //set color for the buttons
         english.setBackgraoundColor(palette.lightGray());
         german.setBackgraoundColor(palette.lightGray());
         french.setBackgraoundColor(palette.lightGray());
         label.setBackgraoundColor(palette.lightGray());
 
+      //Add widgets to the window 
         this.add(label);
         this.add(english);
         this.add(german);
@@ -58,10 +70,15 @@ public class HelloWorldGraphical extends SimpleWindow {
         this.add(close);
     }
 
+    //action for button close
     public void closeWindow() {
         this.getWS().windows.remove(this);
     }
 
+    /*create object WindowSystem that extends GraphicsEventSystem
+	 * to create and draw desktop
+	 * create an object HelloWorldGraphical window and add it to our desktop via windowSystem
+     */
     public static void main(String[] args) {
         int width = 1080;
         int height = 680;

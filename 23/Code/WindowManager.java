@@ -198,32 +198,31 @@ public class WindowManager {
     int deltaX, deltaY;
 
     public void handleMouseDragged(int x, int y) {
-        deltaX = ws.oldX - ws.currentX;
+        deltaX = ws.oldX - ws.currentX; //calculate deltas
         deltaY = ws.oldY - ws.currentY;
         /*
          * If the pointes is inside desktop window, 
          * pressed and dragging inside selected window titlebar
          * detect coordinates and move window accordingly
          */
-        //if ((x >= 0 && x < (ws.desktopWidth - 5)) && (y >= 0 && y < (ws.desktopHeight - 15))) {
-        if (mousePressed && mouseDragging) {
-            windowSetPosition(x, y, activeWindow);
-        } else {
-            SimpleWindow key = findWindow(x, y);
-            if (ws.windows.contains(key) && isInsideComponent(x, y, key.getTitlebar())) {
-                setActiveWindow(key);
-                activeWindow = key;
-                mouseDragging = true;
-                windowSetPosition(x, y, key);
-            }
+        if ((x >= 0 && x < (ws.desktopWidth - 5)) && (y >= 0 && y < (ws.desktopHeight - 15))) {
+	        if (mousePressed && mouseDragging) {
+	            windowSetPosition(x, y, activeWindow);
+	        } else {
+	            SimpleWindow key = findWindow(x, y);
+	            if (ws.windows.contains(key) && isInsideComponent(x, y, key.getTitlebar())) {
+	                setActiveWindow(key);
+	                activeWindow = key;
+	                mouseDragging = true;
+	                windowSetPosition(x, y, key);
+	            }
+	        }
         }
-        //}
-//        oldX = x;
-//        oldY = y;
+
     }
 
     public void handleMousePressed(int x, int y) {
-        deltaX = ws.oldX - ws.currentX;
+        deltaX = ws.oldX - ws.currentX; //calculate deltas
         deltaY = ws.oldY - ws.currentY;
         mousePressed = true; //detects click
     }
@@ -237,7 +236,7 @@ public class WindowManager {
     }
 
     public void handleMouseClicked(int x, int y) {
-        deltaX = ws.oldX - ws.currentX;
+        deltaX = ws.oldX - ws.currentX; //calculate deltas
         deltaY = ws.oldY - ws.currentY;
         //find active window and repaint if accrodingly
         SimpleWindow key = findWindow(x, y);
@@ -303,7 +302,8 @@ public class WindowManager {
 
     //Set position of window
     public void windowSetPosition(int x, int y, SimpleWindow window) {
-        window.setRelativeX((window.getRelativeX()-deltaX));
+    	//set new relativa position according to click and dragging
+        window.setRelativeX((window.getRelativeX()-deltaX)); 
         window.setRelativeY((window.getRelativeY()-deltaY)); 
         ws.requestRepaint(); //repaint window 
     }

@@ -19,12 +19,14 @@ public class Palette {
     private Color trasparent = new Color(255,255,255,0);
     private Color orange = new Color(196,68,80);
     
-  //Methods to call the value of a color from the other classes
+ 
     private Color purple = new Color(80,70,125);
     private Color darkPurple = new Color(42,45,60);
     private Color lightPurple = new Color(99,104,127);
     private Color salmon = new Color(196,68,80);
     private Color alfaGray = new Color(42,45,60,200);
+    
+    //Methods to call the value of a color from the other classes
     
     public Color purple(){  return purple; }
     public Color darkPurple(){  return darkPurple; }

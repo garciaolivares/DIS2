@@ -1,10 +1,16 @@
 package Code;
 
+/* Calculator Class
+ * Initialize the components
+ * Do the operations
+ * */
+
 public class Calculator extends SimpleWindow {
 
     public enum Operator {
         EQUALS, PLUS, MINUS, MULTIPLY, DIVIDE;
     }
+    //Set of buttons
     private RATlabel _display;
     private RATbutton _7;
     private RATbutton _8;
@@ -22,7 +28,8 @@ public class Calculator extends SimpleWindow {
     private RATbutton _dot;
     private RATbutton _equal;
     private RATbutton _plus;
-
+    
+    //Set of variables used in operations and calculations
     public String result = "";
     public String input = "";
     public Operator newOperation;
@@ -30,17 +37,24 @@ public class Calculator extends SimpleWindow {
     public double lastValue = 0.0;
     public String status = "";
     public double displayValue = 0.0;
+    
+    //Set of attributes for the components of the calculator
     Palette palette = new Palette();
     float calHeight = 0.5f;
     float calWidth = 0.2f;
     float digitHeight = 1.0f / 5 ;
     float digitWidth = 1.0f / 4;
 
+    //constructor of the window
     public Calculator(float xPosition, float yPosition, float width, float height, String title) {
         super(xPosition, yPosition, width, height, title);
         init();
     }
 
+    /*
+     * Initialize the components, create the widgets with their attributes, set color, size, text
+     * Have action event called performance
+     */
     public void init() {
         _display = new RATlabel(0.0f, 0.0f, 1.0f, digitHeight, "");
         _display.setBackgraoundColor(palette.white());
@@ -200,6 +214,7 @@ public class Calculator extends SimpleWindow {
         };
         _plus.setBackgraoundColor(palette.pink());
 
+        //Add widgets to the window calculator
         this.add(_display);
 
         this.add(_7);
@@ -224,6 +239,7 @@ public class Calculator extends SimpleWindow {
 
     }
 
+    //Do the operations accordingly Add, Substraction, Multiplication, Division and Equals
     public void operatorButtonPressed(Operator newOperation) {
         switch (previousOperation) {
             case PLUS:
@@ -255,6 +271,7 @@ public class Calculator extends SimpleWindow {
         }
     }
 
+    //Append operations and set result accordingly
     public void commitOperation(Operator operation, double result) {
         status = "FIRST";
         lastValue = result;
@@ -262,6 +279,7 @@ public class Calculator extends SimpleWindow {
         setResult(String.valueOf(result));
     }
 
+    //Setter and getter of the result
     public void setResult(String result) {
         this.result = result;
     }
@@ -270,10 +288,12 @@ public class Calculator extends SimpleWindow {
         return result;
     }
 
+    //Error for division
     public void setError() {
         setResult("ERROR: Division by Zero");
     }
 
+    //Append the numbers introduce in calculator before an operator is selected
     public String appendValue(String val) {
         return input = input + val;
     }
