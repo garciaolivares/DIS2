@@ -10,6 +10,5 @@ public abstract class RATbutton extends RATlabel implements RATmouseListener{
     }
 
     @Override
-    public abstract void performance();
-    
+    public abstract void performance();  
 }

@@ -16,6 +16,8 @@ public class WindowSystem extends GraphicsEventSystem {
     public Palette palette = new Palette(); //object Palette to call personalized colors
     public ArrayList<SimpleWindow> windows; //data structure for our collection of Simple Window objects
     private WindowManager wm;
+    public int oldX, oldY;
+    public int currentX, currentY;
 
     //initialization 
     public WindowSystem(int i, int j) {
@@ -35,19 +37,28 @@ public class WindowSystem extends GraphicsEventSystem {
     public void addWindow(SimpleWindow window) {
         absoluteToRelative(window);
         windows.add(window); //Add SimpleWindow object to our collection
-
         if (wm != null) {
             wm.windowCreated(window);
         }
     }
 
     public void handleMouseDragged(int x, int y) {
+        y -= 33;
+        currentX = x;
+        currentY = y;
         if (wm != null) {
             wm.handleMouseDragged(x, y);
         }
+        oldX = currentX;
+        oldY = currentY;
     }
 
     public void handleMousePressed(int x, int y) {
+        y -= 33;
+        currentX = x;
+        currentY = y;
+        oldX = currentX;
+        oldY = currentY;
         if (wm != null) {
             wm.handleMousePressed(x, y);
         }
@@ -60,6 +71,11 @@ public class WindowSystem extends GraphicsEventSystem {
     }
 
     public void handleMouseClicked(int x, int y) {
+        y -= 33;
+        currentX = x;
+        currentY = y;
+        oldX = currentX;
+        oldY = currentY;
         if (wm != null) {
             wm.handleMouseClicked(x, y);
         }
@@ -72,6 +88,7 @@ public class WindowSystem extends GraphicsEventSystem {
                 requestRepaint();
             }
         }
+
     }
 
     public RATwidget getClickedWidget(int x, int y, SimpleWindow parent) {
@@ -86,7 +103,6 @@ public class WindowSystem extends GraphicsEventSystem {
                 }
             }
         }
-
         return null;
     }
 
@@ -142,8 +158,8 @@ public class WindowSystem extends GraphicsEventSystem {
         int textPosition = sy + ((int) (widget.getHeight() * parent.getHeight()) / 2) + (widget.getFontSize() / 2) - 2;
         int textAlign = (int) (widget.getFontSize() / 2 + (widget.getWidth()));
         //Compare wheter if the widget coordinetes are out of windows range
-        ex = ex > parent.getRelativeX() + parent.getWidth() ? (int) parent.getRelativeX() + parent.getWidth() : (ex <= parent.getRelativeX() ? (int) parent.getRelativeX() : ex);
-        ey = ey > parent.getRelativeY() + parent.getHeight() ? (int) parent.getRelativeY() + parent.getHeight() - 2 : (ey < parent.getRelativeY() ? (int) parent.getRelativeY() : ey);
+        ex = ex > parent.getRelativeX() + parent.getWidth() ? (int) parent.getRelativeX() + parent.getWidth() : (ex <= parent.getRelativeX() ? (int) parent.getRelativeX() : ex );
+        ey = ey > parent.getRelativeY() + parent.getHeight() ? (int) parent.getRelativeY() + parent.getHeight() : (ey < parent.getRelativeY() ? (int) parent.getRelativeY() : ey);
         super.setColor(widget.getBackgraoundColor());
         super.fillRect(sx, sy, ex, ey);
         super.setColor(widget.getBorderColor());
@@ -155,7 +171,7 @@ public class WindowSystem extends GraphicsEventSystem {
 
     //Method to draw a new Window (basic one, no look and feel only plain box)
     public void drawWindow(SimpleWindow window) {
-        absoluteToRelative(window);
+        //absoluteToRelative(window);
         super.setColor(palette.lightGray());
         super.fillRect(window.getRelativeX(), window.getRelativeY(), window.getRelativeX() + window.getWidth(), window.getRelativeY() + window.getHeight());
         super.setColor(palette.black());
@@ -167,7 +183,7 @@ public class WindowSystem extends GraphicsEventSystem {
      */
     public void absoluteToRelative(SimpleWindow window) {
         window.setRelativeX((int) (window.getAbsoluteX() * desktopWidth));
-        window.setRelativeY((int) (window.getAbsoluteY() * desktopHeight));
+        window.setRelativeY((int) (window.getAbsoluteY() * desktopHeight) + wm.titleBarSize);
         window.setWidth((int) (window.getAbsoluteW() * desktopWidth));
         window.setHeight((int) (window.getAbsoluteH() * desktopHeight));
     }

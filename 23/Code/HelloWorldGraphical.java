@@ -9,7 +9,7 @@ public class HelloWorldGraphical extends SimpleWindow {
     RATbutton close;
     Palette palette;
 
-    private HelloWorldGraphical(float xPosition, float yPosition, float width, float height, String title) {
+    public HelloWorldGraphical(float xPosition, float yPosition, float width, float height, String title) {
         super(xPosition, yPosition, width, height, title);
         init();
     }
