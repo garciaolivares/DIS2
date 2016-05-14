@@ -1,4 +1,6 @@
-package Code;
+/*RATwidget class 
+ * Initialize the widget, set attributes of color,position,size and text
+ * */
 
 public abstract class RATwidget {
 
@@ -23,7 +25,6 @@ public abstract class RATwidget {
     /*
      * Set and get for all attributes and components
      */
-    //getters and setters for starting x-position
     public float getsX() {
         return sX;
     }
@@ -32,7 +33,6 @@ public abstract class RATwidget {
         this.sX = sX;
     }
 
-    //getters and setters for starting y-position
     public float getsY() {
         return sY;
     }

@@ -1,4 +1,3 @@
-package Code;
 
 /* Calculator Class
  * Initialize the components
@@ -30,12 +29,12 @@ public class Calculator extends SimpleWindow {
     private RATbutton _plus;
     
     //Set of variables used in operations and calculations
-    public String result = "";
+    public String result = "0.0";
     public String input = "";
     public Operator newOperation;
     public Operator previousOperation = Operator.EQUALS;
     public double lastValue = 0.0;
-    public String status = "";
+    public int status = 0;
     public double displayValue = 0.0;
     
     //Set of attributes for the components of the calculator
@@ -53,10 +52,10 @@ public class Calculator extends SimpleWindow {
 
     /*
      * Initialize the components, create the widgets with their attributes, set color, size, text
-     * Have action event called performance
+     * Performance: action/response to when clicked
      */
     public void init() {
-        _display = new RATlabel(0.0f, 0.0f, 1.0f, digitHeight, "");
+        _display = new RATlabel(0.0f, 0.0f, 1.0f, digitHeight, "0");
         _display.setBackgraoundColor(palette.white());
         _display.setBorderColor(palette.black());
 
@@ -65,6 +64,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("7");
                 _display.setText(val);
+                status = 1;
             }
         };
         _7.setBackgraoundColor(palette.lightGray());
@@ -74,6 +74,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("8");
                 _display.setText(val);
+                status = 1;
             }
         };
         _8.setBackgraoundColor(palette.lightGray());
@@ -83,6 +84,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("9");
                 _display.setText(val);
+                status = 1;
             }
         };
         _9.setBackgraoundColor(palette.lightGray());
@@ -94,6 +96,7 @@ public class Calculator extends SimpleWindow {
                 input = "";
                 operatorButtonPressed(Operator.DIVIDE);
                 _display.setText(getResult());
+                status = 0;
             }
         };
         _slash.setBackgraoundColor(palette.pink());
@@ -103,6 +106,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("4");
                 _display.setText(val);
+                status = 1;
             }
         };
         _4.setBackgraoundColor(palette.lightGray());
@@ -112,6 +116,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("5");
                 _display.setText(val);
+                status = 1;
             }
         };
         _5.setBackgraoundColor(palette.lightGray());
@@ -121,6 +126,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("6");
                 _display.setText(val);
+                status = 1;
             }
         };
         _6.setBackgraoundColor(palette.lightGray());
@@ -132,6 +138,7 @@ public class Calculator extends SimpleWindow {
                 input = "";
                 operatorButtonPressed(Operator.MULTIPLY);
                 _display.setText(getResult());
+                status = 0;
             }
         };
         _star.setBackgraoundColor(palette.pink());
@@ -141,6 +148,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("1");
                 _display.setText(val);
+                status = 1;
             }
         };
         _1.setBackgraoundColor(palette.lightGray());
@@ -150,6 +158,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("2");
                 _display.setText(val);
+                status = 1;
             }
         };
         _2.setBackgraoundColor(palette.lightGray());
@@ -159,6 +168,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("3");
                 _display.setText(val);
+                status = 1;
             }
         };
         _3.setBackgraoundColor(palette.lightGray());
@@ -170,6 +180,7 @@ public class Calculator extends SimpleWindow {
                 input = "";
                 operatorButtonPressed(Operator.MINUS);
                 _display.setText(getResult());
+                status = 0;
             }
         };
         _minus.setBackgraoundColor(palette.pink());
@@ -179,6 +190,7 @@ public class Calculator extends SimpleWindow {
             public void performance() {
                 String val = appendValue("0");
                 _display.setText(val);
+                status = 1;
             }
         };
         _0.setBackgraoundColor(palette.lightGray());
@@ -210,6 +222,7 @@ public class Calculator extends SimpleWindow {
                 input = "";
                 operatorButtonPressed(Operator.PLUS);
                 _display.setText(getResult());
+                status = 0;
             }
         };
         _plus.setBackgraoundColor(palette.pink());
@@ -241,39 +254,37 @@ public class Calculator extends SimpleWindow {
 
     //Do the operations accordingly Add, Substraction, Multiplication, Division and Equals
     public void operatorButtonPressed(Operator newOperation) {
-        switch (previousOperation) {
-            case PLUS:
-                input = "";
-                displayValue = lastValue + displayValue;
-                commitOperation(newOperation, displayValue);
-                break;
-            case MINUS:
-                input = "";
-                displayValue = lastValue - displayValue;
-                commitOperation(newOperation, displayValue);
-                break;
-            case MULTIPLY:
-                input = "";
-                displayValue = lastValue * displayValue;
-                commitOperation(newOperation, displayValue);
-                break;
-            case DIVIDE:
-                if (displayValue == 0) {
-                    setError();
-                } else {
-                    input = "";
-                    displayValue = lastValue / displayValue;
-                    commitOperation(newOperation, displayValue);
-                }
-                break;
-            case EQUALS:
-                commitOperation(newOperation, displayValue);
-        }
+    	if (status!=0){
+	        switch (previousOperation) {
+	            case PLUS:
+	                displayValue = lastValue + displayValue;
+	                commitOperation(newOperation, displayValue);
+	                break;
+	            case MINUS:
+	                displayValue = lastValue - displayValue;
+	                commitOperation(newOperation, displayValue);
+	                break;
+	            case MULTIPLY:
+	                displayValue = lastValue * displayValue;
+	                commitOperation(newOperation, displayValue);
+	                break;
+	            case DIVIDE:
+	                if (displayValue == 0) {
+	                    setError();
+	                } else {
+	                    displayValue = lastValue / displayValue;
+	                    commitOperation(newOperation, displayValue);
+	                }
+	                break;
+	            case EQUALS:
+	                commitOperation(newOperation, displayValue);
+	        }
+    	}
+    	
     }
 
     //Append operations and set result accordingly
     public void commitOperation(Operator operation, double result) {
-        status = "FIRST";
         lastValue = result;
         previousOperation = operation;
         setResult(String.valueOf(result));

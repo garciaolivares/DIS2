@@ -1,14 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Code;
-
-/**
- *
- * @author David
- */
+* Class Component
+* Components of the look and feel of the window
+*/
 public class Component {
      private int sX = 0; //attibute for starting position in x-axis
     private int sY = 0; //attibute for starting position in y-axis

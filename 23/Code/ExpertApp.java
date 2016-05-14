@@ -1,5 +1,3 @@
-package Code;
-
 /* Expert Class
  * Used for the calculator
  * */
@@ -15,7 +13,7 @@ public class ExpertApp  {
         int width = 1080;
         int height = 680;
         WindowSystem ws = new WindowSystem(width, height);
-        Calculator cal = new Calculator(0.1f, 0.1f, 0.22f, 0.5f, "Hello World Graphical");
+        Calculator cal = new Calculator(0.4f, 0.2f, 0.22f, 0.5f, "Hello World Graphical");
         cal.setWS(ws);
         ws.addWindow(cal);
         

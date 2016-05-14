@@ -1,5 +1,3 @@
-package Code;
-
 import java.util.ArrayList;
 
 import de.rwth.hci.Graphics.GraphicsEventSystem;

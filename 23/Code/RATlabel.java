@@ -1,10 +1,10 @@
-package Code;
-
 import java.awt.Color;
 
-public class RATlabel extends RATwidget {
+/*RATlabel class 
+ * Initialize a label, set attributes of color,position,size and text
+ * */
 
-   
+public class RATlabel extends RATwidget {
 
     private Palette palette = new Palette();
     private Color backgraoundColor = palette.transparent();
@@ -15,11 +15,15 @@ public class RATlabel extends RATwidget {
     private int fontSize = 12;
     private String text = "";
 
+    //constructor
     public RATlabel(float sX, float sY, float eX, float eY, String text) {
         super(sX, sY, eX, eY);
         this.text = text;
     }
 
+     /*
+     * Set and get for all attributes and components of the Label
+     */
     public Color getBackgraoundColor() {
         return backgraoundColor;
     }

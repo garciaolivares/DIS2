@@ -1,5 +1,3 @@
-package Code;
-
 /* Hello World Graphical Class
  * Initialize the components
  * Call for the events

@@ -1,4 +1,3 @@
-package Code;
 import java.util.ArrayList;
 
 /* Dock Class

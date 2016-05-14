@@ -1,5 +1,3 @@
-package Code;
-
 /* WindowManages Class
  * Look and feel window and its components
  * mouse actions/events

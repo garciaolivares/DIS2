@@ -1,5 +1,3 @@
-package Code;
-
 import java.util.ArrayList;
 
 /* Simple Window class
